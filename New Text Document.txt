@@ -1,0 +1,298 @@
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ echo "# DCG" >> README.md
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git init
+Reinitialized existing Git repository in D:/DATACORE/.git/
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git add README.md
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git commit -m "first commit"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'CEPL@RNT-LAP-029.(none)')
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ ^C
+
+
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ ^C
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git config --global user.email "rituparnodas.datacoresystems@gmail.com"
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git config --global user.name "Rituparno Das"
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git config --global user.email
+rituparnodas.datacoresystems@gmail.com
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git config --global user.name
+Rituparno Das
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git commit -m "first commit"
+[master (root-commit) 646b436] first commit
+ 103 files changed, 12292 insertions(+)
+ create mode 100644 .gitignore
+ create mode 160000 CHAT
+ create mode 160000 CRUD_operation
+ create mode 100644 NodeJs/index.js
+ create mode 100644 NodeJs/osmodule.js
+ create mode 100644 NodeJs/package-lock.json
+ create mode 100644 NodeJs/package.json
+ create mode 100644 NodeJs/second.js
+ create mode 100644 NodeJs/test.java
+ create mode 100644 NodeJs/test.js
+ create mode 100644 NodeJs/test.py
+ create mode 100644 NodeJs_30days_challenge/blank.txt
+ create mode 100644 NodeJs_30days_challenge/index.js
+ create mode 100644 NodeJs_30days_challenge/read.txt
+ create mode 100644 README.md
+ create mode 100644 Sequelize_learning/controllers/userController.js
+ create mode 100644 Sequelize_learning/database.sqlite
+ create mode 100644 Sequelize_learning/db/sqldb.js
+ create mode 100644 Sequelize_learning/models/address.js
+ create mode 100644 Sequelize_learning/models/contact.js
+ create mode 100644 Sequelize_learning/models/education.js
+ create mode 100644 Sequelize_learning/models/sequelize.js
+ create mode 100644 Sequelize_learning/models/studetails.js
+ create mode 100644 Sequelize_learning/models/user.js
+ create mode 100644 Sequelize_learning/models/userContacts.js
+ create mode 100644 Sequelize_learning/package-lock.json
+ create mode 100644 Sequelize_learning/package.json
+ create mode 100644 Sequelize_learning/src/index.js
+ create mode 100644 THAPA/EXPRESSJS/package-lock.json
+ create mode 100644 THAPA/EXPRESSJS/package.json
+ create mode 100644 THAPA/EXPRESSJS/public/css/style.css
+ create mode 100644 THAPA/EXPRESSJS/public/index.html
+ create mode 100644 THAPA/EXPRESSJS/src/app.js
+ create mode 100644 THAPA/EXPRESSJS/src/nav.js
+ create mode 100644 THAPA/EXPRESSJS/templates/partials/header.hbs
+ create mode 100644 THAPA/EXPRESSJS/templates/views/404.hbs
+ create mode 100644 THAPA/EXPRESSJS/templates/views/about.hbs
+ create mode 100644 THAPA/EXPRESSJS/templates/views/index.hbs
+ create mode 100644 THAPA/EXPRESSJS/templates/views/yt.hbs
+ create mode 100644 THAPA/NODEJS/eventmod/index.js
+ create mode 100644 THAPA/NODEJS/fsasync/index.js
+ create mode 100644 THAPA/NODEJS/fsasync/nodech2.js
+ create mode 100644 THAPA/NODEJS/fsasync/read.txt
+ create mode 100644 THAPA/NODEJS/httpserver/index.js
+ create mode 100644 THAPA/NODEJS/httpserver/userapi/userapi.json
+ create mode 100644 THAPA/NODEJS/importexport/index.js
+ create mode 100644 THAPA/NODEJS/importexport/oper.js
+ create mode 100644 THAPA/NODEJS/index.js
+ create mode 100644 THAPA/NODEJS/jsonnodejs/index.js
+ create mode 100644 THAPA/NODEJS/jsonnodejs/json1.json
+ create mode 100644 THAPA/NODEJS/modwrapperfun/index.js
+ create mode 100644 THAPA/NODEJS/npmmod/index.js
+ create mode 100644 THAPA/NODEJS/npmmod/package-lock.json
+ create mode 100644 THAPA/NODEJS/npmmod/package.json
+ create mode 100644 THAPA/NODEJS/osmodule/index.js
+ create mode 100644 THAPA/NODEJS/osmodule/osmod.js
+ create mode 100644 THAPA/NODEJS/pathmodule/path.js
+ create mode 100644 THAPA/mernbackend/package-lock.json
+ create mode 100644 THAPA/mernbackend/package.json
+ create mode 100644 THAPA/mernbackend/public/style.css
+ create mode 100644 THAPA/mernbackend/src/app.js
+ create mode 100644 THAPA/mernbackend/src/db/conn.js
+ create mode 100644 THAPA/mernbackend/src/models/registers.js
+ create mode 100644 THAPA/mernbackend/templates/partials/header.hbs
+ create mode 100644 THAPA/mernbackend/templates/partials/navbar.hbs
+ create mode 100644 THAPA/mernbackend/templates/views/index.hbs
+ create mode 100644 THAPA/mernbackend/templates/views/login.hbs
+ create mode 100644 THAPA/mernbackend/templates/views/register.hbs
+ create mode 100644 THAPA/package-lock.json
+ create mode 100644 THAPA/package.json
+ create mode 100644 THAPA/restfulapi/package-lock.json
+ create mode 100644 THAPA/restfulapi/package.json
+ create mode 100644 THAPA/restfulapi/src/app.js
+ create mode 100644 THAPA/restfulapi/src/db/conn.js
+ create mode 100644 THAPA/restfulapi/src/db/sqldb.js
+ create mode 100644 THAPA/restfulapi/src/models/students.js
+ create mode 100644 THAPA/restfulapi/src/routers/student.js
+ create mode 100644 VIVA/30-01-2024.txt
+ create mode 100644 VIVA/Questions.txt
+ create mode 100644 VIVA/solve.ipynb
+ create mode 100644 Weather.app/Images/clear.png
+ create mode 100644 Weather.app/Images/clouds.png
+ create mode 100644 Weather.app/Images/drizzle.png
+ create mode 100644 Weather.app/Images/humidity.png
+ create mode 100644 Weather.app/Images/mist.png
+ create mode 100644 Weather.app/Images/rain.png
+ create mode 100644 Weather.app/Images/search.png
+ create mode 100644 Weather.app/Images/snow.png
+ create mode 100644 Weather.app/Images/weather-app-img.zip
+ create mode 100644 Weather.app/Images/wind.png
+ create mode 100644 Weather.app/New Text Document.txt
+ create mode 100644 Weather.app/index.html
+ create mode 100644 Weather.app/style.css
+ create mode 100644 sequelize_task/controllers/userController.js
+ create mode 100644 sequelize_task/models/district.js
+ create mode 100644 sequelize_task/models/index.js
+ create mode 100644 sequelize_task/models/state.js
+ create mode 100644 sequelize_task/models/town.js
+ create mode 100644 sequelize_task/models/user.js
+ create mode 100644 sequelize_task/package-lock.json
+ create mode 100644 sequelize_task/package.json
+ create mode 100644 sequelize_task/sqlz.sql
+ create mode 100644 sequelize_task/src/index.js
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ echo "node_modules/" > .gitignore
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git commit -m "commit"
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   CRUD_operation (modified content, untracked content)
+        modified:   Sequelize_learning/src/index.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        github_guide.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (master)
+$ git branch -M main
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote add origin https://github.com/rituparnodas01/DCG.git
+error: remote origin already exists.
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote origin
+error: unknown subcommand: `origin'
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename [--[no-]progress] <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --[no-]verbose    be verbose; must be placed before a subcommand
+
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ ^C
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote -v
+origin  https://github.com/RamkrishnaLahiri/DCG.git (fetch)
+origin  https://github.com/RamkrishnaLahiri/DCG.git (push)
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote remove origin
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote -v
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git remote add origin https://github.com/rituparnodas01/DCG.git
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   CRUD_operation (modified content, untracked content)
+        modified:   Sequelize_learning/src/index.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        github_guide.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git add .
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git commit -m "commit"
+[main 8671212] commit
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+ create mode 100644 github_guide.txt
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git push origin main
+Enumerating objects: 152, done.
+Counting objects: 100% (152/152), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (128/128), done.
+Writing objects: 100% (152/152), 228.34 KiB | 2.46 MiB/s, done.
+Total 152 (delta 24), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (24/24), done.
+To https://github.com/rituparnodas01/DCG.git
+ * [new branch]      main -> main
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git add .
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git commit -m "commit"
+On branch main
+nothing to commit, working tree clean
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git init
+Reinitialized existing Git repository in D:/DATACORE/.git/
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git add .
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git commit -m "commit"
+On branch main
+nothing to commit, working tree clean
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git push origin main
+Everything up-to-date
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git add CHAT
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git commit -m "commit"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$ git push origin main
+Everything up-to-date
+
+CEPL@RNT-LAP-029 MINGW64 /d/DATACORE (main)
+$

@@ -1,0 +1,6 @@
+reverse a string.
+prime no or not.
+palindrome number
+sorting.(Any)
+find an majority element in an array.
+print 1,3,5,..... upto n.

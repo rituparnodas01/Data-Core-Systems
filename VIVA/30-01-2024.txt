@@ -1,0 +1,6 @@
+1. == means the value is same or not, === means the integer values are same or not.
+2. for eg. cookie is used for checking if the user already logged in the account or not.
+3. "GET" gives us the all values from a db , and using "POST" we're inserting the values in db.
+4. CONTROLLER idk. MIDDLEWIRE: using it we are ensuring that we have to visit the MIDDLEWIRE before completing the task.
+5. we are using express.router to define the function separately , and whenever we need that function we just call it.
+6. 1st in root dir. we are creating .env file, there we just declare the variable and use it where ever we need those variables. also keep in  mind that always keep this .env file in .gitignore.

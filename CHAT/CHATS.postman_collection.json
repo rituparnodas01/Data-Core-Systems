@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "25357854-e486-428a-abcb-ffcd29c80d8e",
+		"name": "CHATS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32334404"
+	},
+	"item": [
+		{
+			"name": "Insert chats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user2\",\r\n  \"group\": \"Science\",\r\n  \"message\": \"Hello, this is a test message.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/chats",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all chats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/chats",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all chats in asc order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/chatsdsc",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatsdsc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all chats in asc order for Science",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/chatsdsc",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatsdsc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all chats in asc order for Arts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/chatsdsc",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatsdsc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1 @@
+api url with key: https://api.openweathermap.org/data/2.5/weather?q=Kolkata&appid=5d761b9d6633b625586a8310d9d2f084&units=metric

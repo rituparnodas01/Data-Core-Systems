@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "47195e6c-848f-4d37-8c79-cba4d31d5ce5",
+		"name": "Blog_App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32936161"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"user1\",\r\n    \"email\" : \"user1@xyz\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:1000/blog/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user1@xyz\",\r\n    \"password\": \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:1000/blog/login",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HomePage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:1000/blog/Home/",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"Home",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BlogbyUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:1000/blog/BlogbyUser/1",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"BlogbyUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog_creation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "blog_heading",
+							"value": "Second Blog",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "blog_content",
+							"value": "Hi!! All , I'm User1. This is my second blog. See you in the next Blog, till then stay tuned :)",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "blog_image",
+							"contentType": "",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/pexels-max-andrey-1366630.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:1000/blog/create/",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog_updation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "blog_heading",
+							"value": "Updated Blog in form-data",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "blog_content",
+							"value": "This is my Updated blog using form-data",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "blog_image",
+							"contentType": "",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/Untitled.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:1000/blog/edit/29",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"edit",
+						"29"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog_deletion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:1000/blog/delete/1",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog_restoration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:1000/blog/restore/1",
+					"host": [
+						"localhost"
+					],
+					"port": "1000",
+					"path": [
+						"blog",
+						"restore",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
