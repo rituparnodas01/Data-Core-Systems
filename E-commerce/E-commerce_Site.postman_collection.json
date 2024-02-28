@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "213fa85d-faed-4bba-83f2-4a189fcfe5fe",
+		"name": "E-commerce_Site",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32936161"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"User5\",\r\n    \"email\" : \"User5@xyz.com\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"User1@xyz.com\",\r\n    \"password\": \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/login",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HomePage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/Home/",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"Home",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
