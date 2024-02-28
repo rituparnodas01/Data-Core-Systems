@@ -19,6 +19,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.user = require("./user")(DataTypes, sequelize, Model)
+db.product = require("./product")(DataTypes, sequelize, Model)
+db.cart = require("./cart")(DataTypes, sequelize, Model)
 
 db.sequelize.sync({ force: false });
 
