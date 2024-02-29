@@ -22,6 +22,9 @@ db.user = require("./user")(DataTypes, sequelize, Model)
 db.product = require("./product")(DataTypes, sequelize, Model)
 db.cart = require("./cart")(DataTypes, sequelize, Model)
 
-db.sequelize.sync({ force: false });
+db.cart.belongsTo(db.user, {foreignKey: 'UserId'});
+db.cart.belongsTo(db.product, {foreignKey: 'ProductId'});
+
+db.sequelize.sync({ force: true });
 
 module.exports = db
