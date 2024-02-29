@@ -21,10 +21,17 @@ db.sequelize = sequelize;
 db.user = require("./user")(DataTypes, sequelize, Model)
 db.product = require("./product")(DataTypes, sequelize, Model)
 db.cart = require("./cart")(DataTypes, sequelize, Model)
+db.order = require("./order")(DataTypes, sequelize, Model)
+db.address = require("./address")(DataTypes, sequelize, Model)
 
 db.cart.belongsTo(db.user, {foreignKey: 'UserId'});
 db.cart.belongsTo(db.product, {foreignKey: 'ProductId'});
+db.order.belongsTo(db.user, {foreignKey: 'UserId'});
+db.order.belongsTo(db.product, {foreignKey: 'ProductId'});
+db.order.belongsTo(db.cart, {foreignKey: 'CartId'});
+db.order.belongsTo(db.address, {foreignKey: 'AddressId'});
+db.address.belongsTo(db.user, {foreignKey: 'UserId'});
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync({ force: false });
 
 module.exports = db

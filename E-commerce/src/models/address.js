@@ -6,16 +6,31 @@ module.exports = (DataTypes, sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
-      Name: {
+      Full_Name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      Address: {
+      Phone_number: {
         type: DataTypes.INTEGER,
+        allowNull: false
+      },Pincode: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },State: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },City: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },House_No: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },Road_name: {
+        type: DataTypes.STRING,
         allowNull: false
       },
       UserId : DataTypes.INTEGER,
-      CartId : DataTypes.INTEGER
+      // CartId : DataTypes.INTEGER
     }, {
       // Other model options go here
       //   tableName: 'educations',
