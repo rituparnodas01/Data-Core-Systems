@@ -4,7 +4,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 var db = require('../models/index');
+const product = require('../models/product');
+const order = require('../models/order');
+const cart = require('../models/cart');
 var User = db.user;
+var Product = db.product;
+var Cart = db.cart;
+
 
 
 var signupUser = async (req, res) => {
@@ -72,7 +78,9 @@ var loginUser = async (req, res) => {
         // res.cookie("token", token, { httpOnly: true });
 
     } catch (error) {
-        res.status(500).send(error);
+        console.error(error);
+        // const errorMessage = 'Sorry :( || No user found';
+        res.status(500).send('Sorry :( || No user found');
     }
 
 }
@@ -80,7 +88,7 @@ var loginUser = async (req, res) => {
 
 var HomePage = async (req, res) => {
     try {
-        var data = await User.findAll({
+        var data = await Product.findAll({
 
 
 
@@ -96,8 +104,81 @@ var HomePage = async (req, res) => {
 };
 
 
+var allproductsbycat = async (req, res) => {
+    try {
+        const { cat } = req.params;
+        var data = await Product.findAll({
+            where: {
+                Product_catagory: cat
+            }
+        })
+        res.status(200).json({ data });
+    } catch (e) {
+        console.error(e);
+        res.status(500).send(e.message || e);
+    }
+
+};
+
+
+var allproductsbycatpriceasc = async (req, res) => {
+    try {
+        const { cat } = req.params;
+        var data = await Product.findAll({
+            where: {
+                Product_catagory: cat
+            },
+            order: [
+                ['price', 'ASC'] // Sort by price in ascending order
+            ]
+        })
+        res.status(200).json({ data });
+    } catch (e) {
+        console.error(e);
+        res.status(500).send(e.message || e);
+    }
+
+};
+
+var allproductsbycatpricedesc = async (req, res) => {
+    try {
+        const { cat } = req.params;
+        var data = await Product.findAll({
+            where: {
+                Product_catagory: cat
+            },
+            order: [
+                ['price', 'DESC'] // Sort by price in ascending order
+            ]
+        })
+        res.status(200).json({ data });
+    } catch (e) {
+        console.error(e);
+        res.status(500).send(e.message || e);
+    }
+
+};
+
+var addtocart = async (req, res) => {
+    try {
+        const { pid } = req.params;
+        const { qty } = req.body;
+        var data = await Cart.create({
+            qty , UserId: req.userId , ProductId: pid
+        })
+        res.status(200).json({ data });
+    } catch (e) {
+        console.error(e);
+        res.status(500).send(e.message || e);
+    }
+}
+
 module.exports = {
     signupUser,
     loginUser,
-    HomePage
+    HomePage,
+    allproductsbycat,
+    allproductsbycatpriceasc,
+    allproductsbycatpricedesc,
+    addtocart
 }

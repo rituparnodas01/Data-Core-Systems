@@ -6,6 +6,10 @@ module.exports = (DataTypes, sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
+      Product_catagory: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       Product_name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -13,10 +17,14 @@ module.exports = (DataTypes, sequelize) => {
       Product_description: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        // unique: true
       },
       Product_image: {
         type: DataTypes.STRING,
+        allowNull: true
+      },
+      Stock: {
+        type: DataTypes.INTEGER, 
         allowNull: false
       },
       Price: {

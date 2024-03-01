@@ -32,6 +32,8 @@ db.order.belongsTo(db.cart, {foreignKey: 'CartId'});
 db.order.belongsTo(db.address, {foreignKey: 'AddressId'});
 db.address.belongsTo(db.user, {foreignKey: 'UserId'});
 
+// db.product.sync({ force: true });
+
 db.sequelize.sync({ force: false });
 
 module.exports = db

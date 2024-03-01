@@ -6,8 +6,8 @@ module.exports = (DataTypes, sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
-      Total_items: {
-        type: DataTypes.STRING,
+      qty: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       UserId : DataTypes.INTEGER,
