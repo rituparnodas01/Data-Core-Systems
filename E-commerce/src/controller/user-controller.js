@@ -7,9 +7,12 @@ var db = require('../models/index');
 const product = require('../models/product');
 const order = require('../models/order');
 const cart = require('../models/cart');
+const address = require('../models/address');
 var User = db.user;
 var Product = db.product;
 var Cart = db.cart;
+var Order = db.order;
+var Address = db.address;
 
 
 
@@ -95,9 +98,9 @@ var HomePage = async (req, res) => {
         })
 
         res.status(200).json({ data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e.message || e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
 
     }
 
@@ -113,9 +116,9 @@ var allproductsbycat = async (req, res) => {
             }
         })
         res.status(200).json({ data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e.message || e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
     }
 
 };
@@ -133,9 +136,9 @@ var allproductsbycatpriceasc = async (req, res) => {
             ]
         })
         res.status(200).json({ data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e.message || e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
     }
 
 };
@@ -152,9 +155,9 @@ var allproductsbycatpricedesc = async (req, res) => {
             ]
         })
         res.status(200).json({ data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e.message || e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
     }
 
 };
@@ -164,13 +167,77 @@ var addtocart = async (req, res) => {
         const { pid } = req.params;
         const { qty } = req.body;
         var data = await Cart.create({
-            qty , UserId: req.userId , ProductId: pid
+            qty, UserId: req.userId, ProductId: pid
         })
         res.status(200).json({ data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e.message || e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
     }
+}
+
+var viewcart = async (req, res) => {
+    try {
+        var data = await Cart.findAll({
+            where: {
+                UserId: req.userId
+            }
+        })
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+}
+
+var AddNewAddress = async (req, res) => {
+    try {
+
+        const { Full_Name, Phone_number, Pincode, State, City, House_No, Road_name } = req.body
+
+        var data = await Address.create({
+            Full_Name, Phone_number, Pincode, State, City, House_No, Road_name, UserId: req.userId
+        })
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+}
+
+var confirmorder = async (req, res) => {
+    try {
+        var price = await Product.findAll({
+            attributes: ["Price", "Product_name"],
+            where: {
+                ProductId: {    
+                    include: [{
+                        model: Cart,
+                        where: {
+                            UserId: req.userId,
+
+                        }
+                    }]
+                }
+            }
+        })
+        res.status(200).json({ price });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+    // try {
+    //     var data = await Order.create({
+    //         Order_status: "Processing", Price: 53 , UserId: req.userId, CartId: req.userId.CartId, AddressId: req.userId.AddressId, ProductId: fbefb,
+    //         where:{
+    //             UserId: req.userId
+    //         }
+    //     })
+    //     res.status(200).json({ data });
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).send(error.message || error);
+    // }
 }
 
 module.exports = {
@@ -180,5 +247,8 @@ module.exports = {
     allproductsbycat,
     allproductsbycatpriceasc,
     allproductsbycatpricedesc,
-    addtocart
+    addtocart,
+    viewcart,
+    AddNewAddress,
+    confirmorder
 }

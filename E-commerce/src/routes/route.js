@@ -18,4 +18,10 @@ router.post('/All_Productspdesc/:cat', Token.verifyToken, usrctrl.allproductsbyc
 
 router.post('/Add-to-cart/:pid', Token.verifyToken, usrctrl.addtocart);
 
+router.post('/ViewCart/', Token.verifyToken, usrctrl.viewcart);
+
+router.post('/AddNewAddress/', Token.verifyToken, usrctrl.AddNewAddress);
+
+router.post('/Confirm_Order/', Token.verifyToken, usrctrl.confirmorder);
+
 module.exports = router;
