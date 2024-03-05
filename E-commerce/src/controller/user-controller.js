@@ -206,26 +206,90 @@ var AddNewAddress = async (req, res) => {
 }
 
 var confirmorder = async (req, res) => {
-    try {
-        var price = await Product.findAll({
-            attributes: ["Price", "Product_name"],
-            where: {
-                ProductId: {    
-                    include: [{
-                        model: Cart,
-                        where: {
-                            UserId: req.userId,
 
-                        }
-                    }]
-                }
+    try {
+        var add  = await Address.findAll({
+            attributes:["AddressId"],
+            where:{
+                UserId: req.userId
             }
         })
-        res.status(200).json({ price });
+        console.log(add[0].AddressId);
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message || error);
     }
+
+    try {
+        var pid = await Cart.findAll({
+            attributes: ["ProductId","CartId","qty"],
+            where: {
+                UserId: req.userId,
+            }
+        })
+        console.log(pid[0].ProductId,pid[0].CartId,pid[0].qty);
+        // return res.status(200).send(`${id}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+
+    try {
+        var prodid = await Product.findAll({
+            attributes: ["ProductId","Price","Stock"],
+            where:{
+                ProductId: pid[0].ProductId
+            }
+        })
+
+        console.log(prodid[0].ProductId,prodid[0].Price,prodid[0].Stock);
+        // res.status(200).send(prodid);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+
+    if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty<=prodid[0].Stock){
+        var order = await Order.create({
+            Order_status:"Placed",
+            Price: prodid[0].Price*pid[0].qty,
+            UserId: req.userId,
+            CartId: pid[0].CartId,
+            AddressId: add[0].AddressId,
+            ProductId: prodid[0].ProductId
+            
+        })
+
+        if (order){
+            console.log(true);
+            var Updated_stock = await Product.update({
+                Stock: prodid[0].Stock - pid[0].qty},
+                {where:{
+                    ProductId: prodid[0].ProductId 
+                }
+            })
+
+            var clear_cart = await Cart.destroy({
+                where:{
+                    UserId: req.userId
+                },
+                // force:true
+            })
+            console.log(Updated_stock);
+        }else{
+            res.send("Failed to place Order")
+        }
+    
+
+        res.status(200).json({order})
+    }else{
+        res.send("PLesae make the right choice")
+    }
+
+    
+
+    // res.status(200).send("order Placed")
+
     // try {
     //     var data = await Order.create({
     //         Order_status: "Processing", Price: 53 , UserId: req.userId, CartId: req.userId.CartId, AddressId: req.userId.AddressId, ProductId: fbefb,
