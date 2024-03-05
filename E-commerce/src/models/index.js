@@ -34,6 +34,6 @@ db.address.belongsTo(db.user, {foreignKey: 'UserId'});
 
 // db.product.sync({ force: true });
 
-db.sequelize.sync({ force: false });
+db.sequelize.sync({ force: true });
 
 module.exports = db

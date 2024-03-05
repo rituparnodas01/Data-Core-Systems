@@ -18,8 +18,8 @@ module.exports = (DataTypes, sequelize) => {
       // timestamps: false
       sequelize, // We need to pass the connection instance
       modelName: 'Cart', // We need to choose the model name
-      paranoid: true,
-      deletedAt: 'destroyTime'
+      // paranoid: true,
+      // deletedAt: 'destroyTime'
     });
   
     // // `sequelize.define` also returns the model
