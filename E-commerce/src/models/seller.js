@@ -1,16 +1,16 @@
 module.exports = (DataTypes, sequelize) => {
-    const User = sequelize.define('user', {
+    const Seller = sequelize.define('seller', {
       // Model attributes are defined here
-      UserId: {
+      SellerId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      User_name: {
+      Seller_name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      User_email: {
+      Seller_email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -29,7 +29,7 @@ module.exports = (DataTypes, sequelize) => {
       //   tableName: 'educations',
       // timestamps: false
       sequelize, // We need to pass the connection instance
-      modelName: 'User', // We need to choose the model name
+      modelName: 'Seller', // We need to choose the model name
       paranoid: true,
       deletedAt: 'destroyTime'
     });
@@ -37,6 +37,6 @@ module.exports = (DataTypes, sequelize) => {
     // // `sequelize.define` also returns the model
     // console.log(User === sequelize.models.User); // true
   
-    return User;
+    return Seller;
   
   }

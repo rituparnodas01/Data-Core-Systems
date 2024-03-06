@@ -4,24 +4,28 @@ const usrctrl = require('../controller/user-controller');
 
 const Token = require('../middleware/token')
 
-router.post('/signup', usrctrl.signupUser);
+router.post('/signupuser', usrctrl.signupUser);
 
-router.post('/login', usrctrl.loginUser);
+router.post('/signupseller', usrctrl.signupSeller);
 
-router.post('/Home', Token.verifyToken, usrctrl.HomePage);
+router.post('/loginuser', usrctrl.loginUser);
 
-router.post('/All_Products/:cat', Token.verifyToken, usrctrl.allproductsbycat);
+router.post('/loginseller', usrctrl.loginSeller);
 
-router.post('/All_Productspasc/:cat', Token.verifyToken, usrctrl.allproductsbycatpriceasc);
+router.post('/Home', Token.User_Verification, usrctrl.HomePage);
 
-router.post('/All_Productspdesc/:cat', Token.verifyToken, usrctrl.allproductsbycatpricedesc);
+router.post('/All_Products/:cat', Token.User_Verification, usrctrl.allproductsbycat);
 
-router.post('/Add-to-cart/:pid', Token.verifyToken, usrctrl.addtocart);
+router.post('/All_Productspasc/:cat', Token.User_Verification, usrctrl.allproductsbycatpriceasc);
 
-router.post('/ViewCart/', Token.verifyToken, usrctrl.viewcart);
+router.post('/All_Productspdesc/:cat', Token.User_Verification, usrctrl.allproductsbycatpricedesc);
 
-router.post('/AddNewAddress/', Token.verifyToken, usrctrl.AddNewAddress);
+router.post('/Add-to-cart/:pid', Token.User_Verification, usrctrl.addtocart);
 
-router.post('/Confirm_Order/', Token.verifyToken, usrctrl.confirmorder);
+router.post('/ViewCart/', Token.User_Verification, usrctrl.viewcart);
+
+router.post('/AddNewAddress/', Token.User_Verification, usrctrl.AddNewAddress);
+
+router.post('/Confirm_Order/', Token.User_Verification, usrctrl.confirmorder);
 
 module.exports = router;

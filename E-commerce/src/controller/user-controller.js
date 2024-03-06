@@ -1,38 +1,38 @@
+require("dotenv").config();
 const { sequelize, QueryTypes, Op } = require('sequelize');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-
-var db = require('../models/index');
 const product = require('../models/product');
 const order = require('../models/order');
 const cart = require('../models/cart');
 const address = require('../models/address');
+var db = require('../models/index');
 var User = db.user;
 var Product = db.product;
 var Cart = db.cart;
 var Order = db.order;
 var Address = db.address;
 
+// .........................................................................................................................................................//
 
+// Signup_Seller
 
-var signupUser = async (req, res) => {
+async function signupSeller(req, res) {
     try {
 
-        const { name, email, password, confirmPassword } = req.body;
+        const { Seller_name, Seller_email, password, confirmPassword } = req.body;
 
         if (password != confirmPassword) {
             return res.json({ message: "Passwords do not match" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword)
+        console.log(hashedPassword);
 
-        const user = await User.create({ name, email, password: hashedPassword, confirmPassword: hashedPassword });
+        const user = await User.create({ Seller_name, Seller_email, password: hashedPassword, confirmPassword: hashedPassword });
 
         if (user) {
-            const token = jwt.sign({ userId: user.UserId, email: user.email }, process.env.JWT_SECRET, {
-
+            const token = jwt.sign({ sellerId: user.SellerId, selleremail: user.Seller_email }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expires in 1 hour
             });
 
@@ -44,7 +44,6 @@ var signupUser = async (req, res) => {
         }
 
         // res.status(201).json({ UserId, name, email, password, confirmPassword });
-
     } catch (error) {
         res.status(500).send(error);
 
@@ -53,21 +52,64 @@ var signupUser = async (req, res) => {
 
 }
 
-var loginUser = async (req, res) => {
+// .........................................................................................................................................................//
+
+// Signup_User
+
+async function signupUser(req, res) {
     try {
-        const { email, password } = req.body;
+
+        const { User_name, User_email, password, confirmPassword } = req.body;
+
+        if (password != confirmPassword) {
+            return res.json({ message: "Passwords do not match" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(hashedPassword);
+
+        const user = await User.create({ User_name, User_email, password: hashedPassword, confirmPassword: hashedPassword });
+
+        if (user) {
+            const token = jwt.sign({ userId: user.UserId, useremail: user.User_email }, process.env.JWT_SECRET, {
+                expiresIn: '1h', // Token expires in 1 hour
+            });
+
+            console.log('SignUp successful. Token:', token);
+            res.status(200).json({ message: "Successfully SignedUp", token: token });
+        }
+        else {
+            res.status(200).json({ message: "Invalid Password" });
+        }
+
+        // res.status(201).json({ UserId, name, email, password, confirmPassword });
+    } catch (error) {
+        res.status(500).send(error);
+
+    }
+
+
+}
+
+// .........................................................................................................................................................//
+
+// Login_Seller
+
+var loginSeller = async (req, res) => {
+    try {
+        const { User_email, password } = req.body;
 
 
 
         const checklogin = await User.findAll({
-            attributes: ['UserId', 'email', 'password'],
-            where: { email: email }
+            attributes: ['UserId', 'User_email', 'password'],
+            where: { User_email: User_email }
         });
 
         const passwordMatch = await bcrypt.compare(password, checklogin[0].password);
 
         if (passwordMatch) {
-            const token = jwt.sign({ userId: checklogin[0].UserId, email: checklogin[0].email }, process.env.JWT_SECRET, {
+            const token = jwt.sign({ userId: checklogin[0].UserId, useremail: checklogin[0].User_email }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expires in 1 hour
             });
 
@@ -88,6 +130,48 @@ var loginUser = async (req, res) => {
 
 }
 
+// .........................................................................................................................................................//
+
+// Login_User
+
+var loginUser = async (req, res) => {
+    try {
+        const { User_email, password } = req.body;
+
+
+
+        const checklogin = await User.findAll({
+            attributes: ['UserId', 'User_email', 'password'],
+            where: { User_email: User_email }
+        });
+
+        const passwordMatch = await bcrypt.compare(password, checklogin[0].password);
+
+        if (passwordMatch) {
+            const token = jwt.sign({ userId: checklogin[0].UserId, useremail: checklogin[0].User_email }, process.env.JWT_SECRET, {
+                expiresIn: '1h', // Token expires in 1 hour
+            });
+
+            console.log('Login successful. Token:', token);
+            res.status(200).json({ message: "Successfully logged in", token: token });
+        }
+        else {
+            res.status(200).json({ message: "Invalid Password" });
+        }
+
+        // res.cookie("token", token, { httpOnly: true });
+
+    } catch (error) {
+        console.error(error);
+        // const errorMessage = 'Sorry :( || No user found';
+        res.status(500).send('Sorry :( || No user found');
+    }
+
+}
+
+// .........................................................................................................................................................//
+
+// HomePage
 
 var HomePage = async (req, res) => {
     try {
@@ -106,6 +190,7 @@ var HomePage = async (req, res) => {
 
 };
 
+// .........................................................................................................................................................//
 
 var allproductsbycat = async (req, res) => {
     try {
@@ -123,6 +208,7 @@ var allproductsbycat = async (req, res) => {
 
 };
 
+// .........................................................................................................................................................//
 
 var allproductsbycatpriceasc = async (req, res) => {
     try {
@@ -143,6 +229,8 @@ var allproductsbycatpriceasc = async (req, res) => {
 
 };
 
+// .........................................................................................................................................................//
+
 var allproductsbycatpricedesc = async (req, res) => {
     try {
         const { cat } = req.params;
@@ -162,6 +250,8 @@ var allproductsbycatpricedesc = async (req, res) => {
 
 };
 
+// .........................................................................................................................................................//
+
 var addtocart = async (req, res) => {
     try {
         const { pid } = req.params;
@@ -174,7 +264,9 @@ var addtocart = async (req, res) => {
         console.error(error);
         res.status(500).send(error.message || error);
     }
-}
+};
+
+// .........................................................................................................................................................//
 
 var viewcart = async (req, res) => {
     try {
@@ -188,7 +280,9 @@ var viewcart = async (req, res) => {
         console.error(error);
         res.status(500).send(error.message || error);
     }
-}
+};
+
+// .........................................................................................................................................................//
 
 var AddNewAddress = async (req, res) => {
     try {
@@ -203,7 +297,9 @@ var AddNewAddress = async (req, res) => {
         console.error(error);
         res.status(500).send(error.message || error);
     }
-}
+};
+
+// .........................................................................................................................................................//
 
 var confirmorder = async (req, res) => {
 
@@ -285,26 +381,13 @@ var confirmorder = async (req, res) => {
     }else{
         res.send("PLesae make the right choice")
     }
+};
 
-    
-
-    // res.status(200).send("order Placed")
-
-    // try {
-    //     var data = await Order.create({
-    //         Order_status: "Processing", Price: 53 , UserId: req.userId, CartId: req.userId.CartId, AddressId: req.userId.AddressId, ProductId: fbefb,
-    //         where:{
-    //             UserId: req.userId
-    //         }
-    //     })
-    //     res.status(200).json({ data });
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).send(error.message || error);
-    // }
-}
+// .........................................................................................................................................................//
 
 module.exports = {
+    signupSeller,
+    loginSeller,
     signupUser,
     loginUser,
     HomePage,
