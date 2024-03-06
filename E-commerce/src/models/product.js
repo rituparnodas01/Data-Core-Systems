@@ -1,3 +1,5 @@
+const { INTEGER } = require("sequelize");
+
 module.exports = (DataTypes, sequelize) => {
     const Product = sequelize.define('product', {
       // Model attributes are defined here
@@ -31,6 +33,7 @@ module.exports = (DataTypes, sequelize) => {
         type: DataTypes.STRING, 
         allowNull: false
       },
+      SellerId: DataTypes.INTEGER,
       // blog_id : DataTypes.INTEGER
     }, {
       // Other model options go here

@@ -6,18 +6,25 @@ const product = require('../models/product');
 const order = require('../models/order');
 const cart = require('../models/cart');
 const address = require('../models/address');
+const seller = require('../models/seller');
 var db = require('../models/index');
 var User = db.user;
 var Product = db.product;
 var Cart = db.cart;
 var Order = db.order;
 var Address = db.address;
+var Seller = db.seller
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
+
+// ----------------------------------------------------------------------SELLER ENDPOINT-------------------------------------------------------------------- //
+ 
+// ......................................................................................................................................................... //
 
 // Signup_Seller
 
-async function signupSeller(req, res) {
+var signupSeller = async (req, res) => {
+// async function signupSeller(req, res) {
     try {
 
         const { Seller_name, Seller_email, password, confirmPassword } = req.body;
@@ -29,10 +36,10 @@ async function signupSeller(req, res) {
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword);
 
-        const user = await User.create({ Seller_name, Seller_email, password: hashedPassword, confirmPassword: hashedPassword });
+        const seller = await Seller.create({ Seller_name, Seller_email, password: hashedPassword, confirmPassword: hashedPassword });
 
-        if (user) {
-            const token = jwt.sign({ sellerId: user.SellerId, selleremail: user.Seller_email }, process.env.JWT_SECRET, {
+        if (seller) {
+            const token = jwt.sign({ sellerId: seller.SellerId, selleremail: seller.Seller_email }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expires in 1 hour
             });
 
@@ -52,7 +59,70 @@ async function signupSeller(req, res) {
 
 }
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
+
+// Login_Seller
+
+var loginSeller = async (req, res) => {
+    try {
+        const { Seller_email, password } = req.body;
+
+
+
+        const checklogin = await User.findAll({
+            attributes: ['UserId', 'User_email', 'password'],
+            where: { Seller_email: Seller_email }
+        });
+
+        const passwordMatch = await bcrypt.compare(password, checklogin[0].password);
+
+        if (passwordMatch) {
+            const token = jwt.sign({ sellerId: checklogin[0].SellerId, selleremail: checklogin[0].Seller_email }, process.env.JWT_SECRET, {
+                expiresIn: '1h', // Token expires in 1 hour
+            });
+
+            console.log('Login successful. Token:', token);
+            res.status(200).json({ message: "Successfully logged in", token: token });
+        }
+        else {
+            res.status(200).json({ message: "Invalid Password" });
+        }
+
+        // res.cookie("token", token, { httpOnly: true });
+
+    } catch (error) {
+        console.error(error);
+        // const errorMessage = 'Sorry :( || No user found';
+        res.status(500).send('Sorry :( || No Seller found');
+    }
+
+}
+
+// ......................................................................................................................................................... //
+
+// Add Products //
+
+var addproducts = async (req,res) => {
+    try {
+
+        const {Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+
+        var data = await Product.create({
+            Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
+        })
+
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+}
+
+// ......................................................................................................................................................... //
+
+// ----------------------------------------------------------------------USER ENDPOINT---------------------------------------------------------------------- //
+
+// ......................................................................................................................................................... //
 
 // Signup_User
 
@@ -91,46 +161,7 @@ async function signupUser(req, res) {
 
 }
 
-// .........................................................................................................................................................//
-
-// Login_Seller
-
-var loginSeller = async (req, res) => {
-    try {
-        const { User_email, password } = req.body;
-
-
-
-        const checklogin = await User.findAll({
-            attributes: ['UserId', 'User_email', 'password'],
-            where: { User_email: User_email }
-        });
-
-        const passwordMatch = await bcrypt.compare(password, checklogin[0].password);
-
-        if (passwordMatch) {
-            const token = jwt.sign({ userId: checklogin[0].UserId, useremail: checklogin[0].User_email }, process.env.JWT_SECRET, {
-                expiresIn: '1h', // Token expires in 1 hour
-            });
-
-            console.log('Login successful. Token:', token);
-            res.status(200).json({ message: "Successfully logged in", token: token });
-        }
-        else {
-            res.status(200).json({ message: "Invalid Password" });
-        }
-
-        // res.cookie("token", token, { httpOnly: true });
-
-    } catch (error) {
-        console.error(error);
-        // const errorMessage = 'Sorry :( || No user found';
-        res.status(500).send('Sorry :( || No user found');
-    }
-
-}
-
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 // Login_User
 
@@ -169,7 +200,7 @@ var loginUser = async (req, res) => {
 
 }
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 // HomePage
 
@@ -190,7 +221,7 @@ var HomePage = async (req, res) => {
 
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var allproductsbycat = async (req, res) => {
     try {
@@ -208,7 +239,7 @@ var allproductsbycat = async (req, res) => {
 
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var allproductsbycatpriceasc = async (req, res) => {
     try {
@@ -229,7 +260,7 @@ var allproductsbycatpriceasc = async (req, res) => {
 
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var allproductsbycatpricedesc = async (req, res) => {
     try {
@@ -250,7 +281,7 @@ var allproductsbycatpricedesc = async (req, res) => {
 
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var addtocart = async (req, res) => {
     try {
@@ -266,7 +297,7 @@ var addtocart = async (req, res) => {
     }
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var viewcart = async (req, res) => {
     try {
@@ -282,7 +313,7 @@ var viewcart = async (req, res) => {
     }
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var AddNewAddress = async (req, res) => {
     try {
@@ -299,7 +330,7 @@ var AddNewAddress = async (req, res) => {
     }
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 var confirmorder = async (req, res) => {
 
@@ -383,11 +414,15 @@ var confirmorder = async (req, res) => {
     }
 };
 
-// .........................................................................................................................................................//
+// ......................................................................................................................................................... //
 
 module.exports = {
     signupSeller,
     loginSeller,
+    addproducts,
+
+
+
     signupUser,
     loginUser,
     HomePage,

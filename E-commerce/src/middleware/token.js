@@ -36,6 +36,8 @@ const User_Verification = (req, res, next) => {
 };
 
 
+
+
 const Seller_Verification = (req, res, next) => {
 
     // console.log("HERE");
@@ -55,8 +57,8 @@ const Seller_Verification = (req, res, next) => {
         }
 
         // Token is valid, proceed to the next middleware or route handler
-        req.userId = decoded.userId;
-        req.useremail = decoded.useremail;
+        req.sellerId = decoded.sellerId;
+        req.selleremail = decoded.selleremail;
         next();
     });
 };

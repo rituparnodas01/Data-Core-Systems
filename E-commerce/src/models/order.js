@@ -15,7 +15,6 @@ module.exports = (DataTypes, sequelize) => {
         allowNull: false
       },
       UserId : DataTypes.INTEGER,
-      CartId : DataTypes.INTEGER,
       AddressId: DataTypes.INTEGER,
       ProductId: DataTypes.INTEGER,
     }, {

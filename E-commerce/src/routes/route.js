@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const usrctrl = require('../controller/user-controller');
-
 const Token = require('../middleware/token')
-
-router.post('/signupuser', usrctrl.signupUser);
 
 router.post('/signupseller', usrctrl.signupSeller);
 
-router.post('/loginuser', usrctrl.loginUser);
-
 router.post('/loginseller', usrctrl.loginSeller);
+
+router.post('/addproducts', Token.Seller_Verification, usrctrl.addproducts);
+
+
+
+router.post('/signupuser', usrctrl.signupUser);
+
+router.post('/loginuser', usrctrl.loginUser);
 
 router.post('/Home', Token.User_Verification, usrctrl.HomePage);
 
