@@ -9,7 +9,7 @@ router.post('/loginseller', usrctrl.loginSeller);
 
 router.post('/addproducts', Token.Seller_Verification, usrctrl.addproducts);
 
-
+router.post('/editproducts', Token.Seller_Verification, usrctrl.editproducts);
 
 router.post('/signupuser', usrctrl.signupUser);
 

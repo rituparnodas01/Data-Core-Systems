@@ -120,6 +120,26 @@ var addproducts = async (req,res) => {
 
 // ......................................................................................................................................................... //
 
+// Edit Products //
+
+var editproducts = async (req,res) => {
+    try {
+
+        const {Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+
+        var data = await Product.update({
+            Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
+        })
+
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+}
+
+// ......................................................................................................................................................... //
+
 // ----------------------------------------------------------------------USER ENDPOINT---------------------------------------------------------------------- //
 
 // ......................................................................................................................................................... //
@@ -420,7 +440,7 @@ module.exports = {
     signupSeller,
     loginSeller,
     addproducts,
-
+    editproducts,
 
 
     signupUser,
