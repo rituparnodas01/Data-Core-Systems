@@ -18,13 +18,13 @@ var Seller = db.seller
 // ......................................................................................................................................................... //
 
 // ----------------------------------------------------------------------SELLER ENDPOINT-------------------------------------------------------------------- //
- 
+
 // ......................................................................................................................................................... //
 
 // Signup_Seller
 
 var signupSeller = async (req, res) => {
-// async function signupSeller(req, res) {
+    // async function signupSeller(req, res) {
     try {
 
         const { Seller_name, Seller_email, password, confirmPassword } = req.body;
@@ -102,10 +102,10 @@ var loginSeller = async (req, res) => {
 
 // Add Products //
 
-var addproducts = async (req,res) => {
+var addproducts = async (req, res) => {
     try {
 
-        const {Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+        const { Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
 
         var data = await Product.create({
             Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
@@ -122,10 +122,10 @@ var addproducts = async (req,res) => {
 
 // Edit Products //
 
-var editproducts = async (req,res) => {
+var editproducts = async (req, res) => {
     try {
 
-        const {Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+        const { Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
 
         var data = await Product.update({
             Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
@@ -305,12 +305,15 @@ var allproductsbycatpricedesc = async (req, res) => {
 
 var addtocart = async (req, res) => {
     try {
-        const { pid } = req.params;
-        const { qty } = req.body;
-        var data = await Cart.create({
-            qty, UserId: req.userId, ProductId: pid
-        })
+        if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty <= prodid[0].Stock) {
+            const { pid } = req.params;
+            const { qty } = req.body;
+            var data = await Cart.create({
+                qty, UserId: req.userId, ProductId: pid
+            })
         res.status(200).json({ data });
+        }
+        
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message || error);
@@ -355,9 +358,9 @@ var AddNewAddress = async (req, res) => {
 var confirmorder = async (req, res) => {
 
     try {
-        var add  = await Address.findAll({
-            attributes:["AddressId"],
-            where:{
+        var add = await Address.findAll({
+            attributes: ["AddressId"],
+            where: {
                 UserId: req.userId
             }
         })
@@ -369,12 +372,12 @@ var confirmorder = async (req, res) => {
 
     try {
         var pid = await Cart.findAll({
-            attributes: ["ProductId","CartId","qty"],
+            attributes: ["ProductId", "CartId", "qty"],
             where: {
                 UserId: req.userId,
             }
         })
-        console.log(pid[0].ProductId,pid[0].CartId,pid[0].qty);
+        console.log(pid[0].ProductId, pid[0].CartId, pid[0].qty);
         // return res.status(200).send(`${id}`);
     } catch (error) {
         console.error(error);
@@ -383,53 +386,55 @@ var confirmorder = async (req, res) => {
 
     try {
         var prodid = await Product.findAll({
-            attributes: ["ProductId","Price","Stock"],
-            where:{
+            attributes: ["ProductId", "Price", "Stock"],
+            where: {
                 ProductId: pid[0].ProductId
             }
         })
 
-        console.log(prodid[0].ProductId,prodid[0].Price,prodid[0].Stock);
+        console.log(prodid[0].ProductId, prodid[0].Price, prodid[0].Stock);
         // res.status(200).send(prodid);
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message || error);
     }
 
-    if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty<=prodid[0].Stock){
+    if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty <= prodid[0].Stock) {
         var order = await Order.create({
-            Order_status:"Placed",
-            Price: prodid[0].Price*pid[0].qty,
+            Order_status: "Placed",
+            Price: prodid[0].Price * pid[0].qty,
             UserId: req.userId,
             CartId: pid[0].CartId,
             AddressId: add[0].AddressId,
             ProductId: prodid[0].ProductId
-            
+
         })
 
-        if (order){
+        if (order) {
             console.log(true);
             var Updated_stock = await Product.update({
-                Stock: prodid[0].Stock - pid[0].qty},
-                {where:{
-                    ProductId: prodid[0].ProductId 
-                }
-            })
+                Stock: prodid[0].Stock - pid[0].qty
+            },
+                {
+                    where: {
+                        ProductId: prodid[0].ProductId
+                    }
+                })
 
             var clear_cart = await Cart.destroy({
-                where:{
+                where: {
                     UserId: req.userId
                 },
                 // force:true
             })
             console.log(Updated_stock);
-        }else{
+        } else {
             res.send("Failed to place Order")
         }
-    
 
-        res.status(200).json({order})
-    }else{
+
+        res.status(200).json({ order })
+    } else {
         res.send("PLesae make the right choice")
     }
 };
