@@ -305,19 +305,49 @@ var allproductsbycatpricedesc = async (req, res) => {
 
 var addtocart = async (req, res) => {
     try {
-        if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty <= prodid[0].Stock) {
-            const { pid } = req.params;
-            const { qty } = req.body;
-            var data = await Cart.create({
-                qty, UserId: req.userId, ProductId: pid
-            })
-        res.status(200).json({ data });
-        }
-        
+        var pid = await Cart.findAll({
+            attributes: ["ProductId", "CartId", "qty"],
+            where: {
+                UserId: req.userId,
+            }
+        })
+        console.log(pid[0].ProductId, pid[0].CartId, pid[0].qty);
+        // return res.status(200).send(`${id}`);
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message || error);
     }
+
+    try {
+        var prodid = await Product.findAll({
+            attributes: ["ProductId", "Price", "Stock"],
+            where: {
+                ProductId: pid[0].ProductId
+            }
+        })
+
+        console.log(prodid[0].ProductId, prodid[0].Price, prodid[0].Stock);
+        // res.status(200).send(prodid);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+    // try {
+    if (pid[0].ProductId === prodid[0].ProductId && pid[0].qty <= prodid[0].Stock) {
+        const { pid } = req.params;
+        const { qty } = req.body;
+        var data = await Cart.create({
+            qty, UserId: req.userId, ProductId: pid
+        })
+        res.status(200).json({ data });
+    }else{
+        res.send("PLesae make the right choice")
+    }
+
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).send(error.message || error);
+    // }
 };
 
 // ......................................................................................................................................................... //
