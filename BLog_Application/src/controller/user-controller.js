@@ -161,7 +161,7 @@ var BlogbyUserPage = async (req, res) => {
 
 var createblog = async (req, res) => {
     try {
-
+        
         const { blog_heading, blog_content } = req.body;
         const blog_image = req.file.filename;
 

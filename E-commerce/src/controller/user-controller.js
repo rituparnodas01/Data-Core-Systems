@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { sequelize, QueryTypes, Op } = require('sequelize');
+const { sequelize, QueryTypes, Op, where } = require('sequelize');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const product = require('../models/product');
@@ -69,8 +69,8 @@ var loginSeller = async (req, res) => {
 
 
 
-        const checklogin = await User.findAll({
-            attributes: ['UserId', 'User_email', 'password'],
+        const checklogin = await Seller.findAll({
+            attributes: ['SellerId', 'Seller_email', 'password'],
             where: { Seller_email: Seller_email }
         });
 
@@ -106,9 +106,10 @@ var addproducts = async (req, res) => {
     try {
 
         const { Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+        const Product_image = req.file.filename;
 
         var data = await Product.create({
-            Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
+            Product_catagory, Product_name, Product_description, Product_image, Stock, Price, SellerId: req.sellerId
         })
 
         res.status(200).json({ data });
@@ -125,11 +126,59 @@ var addproducts = async (req, res) => {
 var editproducts = async (req, res) => {
     try {
 
+        const { pid } = req.params
         const { Product_catagory, Product_name, Product_description, Stock, Price } = req.body;
+        const Product_image = req.file ? req.file.filename : null;
 
-        var data = await Product.update({
-            Product_catagory, Product_name, Product_description, Stock, Price, SellerId: req.sellerId
-        })
+        if (req.selleremail == "admin@admin.flipzon") {
+            var data = await Product.update({
+                Product_catagory, Product_name, Product_description, Product_image, Stock, Price, SellerId: req.sellerId
+            }, {
+                where: {
+                    ProductId: pid
+                }
+            })
+        } else {
+            var data = await Product.update({
+                Product_catagory, Product_name, Product_description, Product_image, Stock, Price, SellerId: req.sellerId
+            }, {
+                where: {
+                    ProductId: pid,
+                    SellerId: req.sellerId
+                }
+            })
+        }
+
+        
+
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message || error);
+    }
+}
+
+// ......................................................................................................................................................... //
+
+// Delete Products //
+
+var deleteproducts = async (req, res) => {
+    try {
+        const { pid } = req.params
+        if (req.selleremail == "admin@admin.flipzon") {
+            var data = await Product.destroy({
+                where: {
+                    ProductId: pid
+                }
+            })
+        } else {
+            var data = await Product.destroy({
+                where: {
+                    ProductId: pid,
+                    SellerId: req.sellerId
+                }
+            })
+        }
 
         res.status(200).json({ data });
     } catch (error) {
@@ -467,6 +516,7 @@ module.exports = {
     loginSeller,
     addproducts,
     editproducts,
+    deleteproducts,
 
 
     signupUser,

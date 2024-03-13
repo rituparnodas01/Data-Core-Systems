@@ -2,14 +2,20 @@ const express = require("express");
 const router = express.Router();
 const usrctrl = require('../controller/user-controller');
 const Token = require('../middleware/token')
+const uploads = require('../middleware/uploads');
 
 router.post('/signupseller', usrctrl.signupSeller);
 
 router.post('/loginseller', usrctrl.loginSeller);
 
-router.post('/addproducts', Token.Seller_Verification, usrctrl.addproducts);
+router.post('/addproducts', Token.Seller_Verification, uploads.single('Product_image'), usrctrl.addproducts);
 
-router.post('/editproducts', Token.Seller_Verification, usrctrl.editproducts);
+router.post('/editproducts/:pid', Token.Seller_Verification, uploads.single('Product_image'), usrctrl.editproducts);
+
+router.post('/deleteproducts/:pid', Token.Seller_Verification, usrctrl.deleteproducts);
+
+
+
 
 router.post('/signupuser', usrctrl.signupUser);
 
