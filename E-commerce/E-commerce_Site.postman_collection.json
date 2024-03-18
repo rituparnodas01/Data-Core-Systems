@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Seller_name\" : \"Seller3\",\r\n    \"Seller_email\" : \"Seller3@seller.flipzon\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
+					"raw": "{\r\n    \"Seller_name\" : \"Seller4\",\r\n    \"Seller_email\" : \"Seller4@seller.flipzon\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -61,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"Seller1@seller.flipzon\",\r\n    \"password\": \"abc123\"\r\n}",
+					"raw": "{\r\n    \"Seller_email\": \"Seller3@seller.flipzon\",\r\n    \"password\": \"abc123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,13 +98,45 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Product_catagory\": \"Electronics\",\r\n    \"Product_name\": \"Nokia_3310\",\r\n    \"Product_description\": \"Feature Mobile\",\r\n    \"Stock\": \"10\",\r\n    \"Price\": \"3999\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_catagory",
+							"value": "Electronics",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_name",
+							"value": "iPhone XS MaxProUltra LE",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_description",
+							"value": "IOS",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_image",
+							"contentType": "image/png",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/Untitled.jpg"
+						},
+						{
+							"key": "Stock",
+							"value": "100",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "999999",
+							"contentType": "application/json",
+							"type": "text"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:2000/Flipzon/addproducts",
@@ -115,6 +147,111 @@
 					"path": [
 						"Flipzon",
 						"addproducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{seller}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_catagory",
+							"value": "Electronics",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_name",
+							"value": "iPhone 15 ProMaxUltra LE",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_description",
+							"value": "android",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_image",
+							"contentType": "image/png",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/pexels-max-andrey-1366630.jpg"
+						},
+						{
+							"key": "Stock",
+							"value": "10",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "99999",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/editproducts/3",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"editproducts",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{seller}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        "
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/deleteproducts/1",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"deleteproducts",
+						"1"
 					]
 				}
 			},
