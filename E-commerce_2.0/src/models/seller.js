@@ -1,58 +1,35 @@
-const { INTEGER } = require("sequelize");
-
 module.exports = (DataTypes, sequelize) => {
-    const Product = sequelize.define('product', {
+    const Seller = sequelize.define('seller', {
       // Model attributes are defined here
-      id: {
+      SellerId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      category: {
+      Seller_name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      colors: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      company: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      featured: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      description: {
+      Seller_email: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true
+        unique: true
       },
-      image: {
+      password: {
         type: DataTypes.STRING,
-        allowNull: true
-      },
-      stock: {
-        type: DataTypes.INTEGER, 
         allowNull: false
       },
-      price: {
+      confirmPassword: {
         type: DataTypes.STRING, 
         allowNull: false
       },
-      SellerId: DataTypes.INTEGER,
       // blog_id : DataTypes.INTEGER
     }, {
       // Other model options go here
       //   tableName: 'educations',
       // timestamps: false
       sequelize, // We need to pass the connection instance
-      modelName: 'Product', // We need to choose the model name
+      modelName: 'Seller', // We need to choose the model name
       paranoid: true,
       deletedAt: 'destroyTime'
     });
@@ -60,6 +37,6 @@ module.exports = (DataTypes, sequelize) => {
     // // `sequelize.define` also returns the model
     // console.log(User === sequelize.models.User); // true
   
-    return Product;
+    return Seller;
   
   }

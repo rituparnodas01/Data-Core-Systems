@@ -1,0 +1,646 @@
+{
+	"info": {
+		"_postman_id": "213fa85d-faed-4bba-83f2-4a189fcfe5fe",
+		"name": "E-commerce_Site",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32936161"
+	},
+	"item": [
+		{
+			"name": "SignUpSeller",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Seller_name\" : \"Seller4\",\r\n    \"Seller_email\" : \"Seller4@seller.flipzon\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/signupseller",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"signupseller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginSeller",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Seller_email\": \"Seller3@seller.flipzon\",\r\n    \"password\": \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/loginseller",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"loginseller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{seller}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_catagory",
+							"value": "Electronics",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_name",
+							"value": "iPhone XS MaxProUltra LE",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_description",
+							"value": "IOS",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_image",
+							"contentType": "image/png",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/Untitled.jpg"
+						},
+						{
+							"key": "Stock",
+							"value": "100",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "999999",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/addproducts",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"addproducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{seller}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Product_catagory",
+							"value": "Electronics",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_name",
+							"value": "iPhone 15 ProMaxUltra LE",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_description",
+							"value": "android",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Product_image",
+							"contentType": "image/png",
+							"type": "file",
+							"src": "/C:/Users/CEPL/Downloads/pexels-max-andrey-1366630.jpg"
+						},
+						{
+							"key": "Stock",
+							"value": "10",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Price",
+							"value": "99999",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/editproducts/3",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"editproducts",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{seller}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        "
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/deleteproducts/1",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"deleteproducts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignUpUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"User_name\" : \"User1\",\r\n    \"User_email\" : \"User1@user.flipzon\",\r\n    \"password\" : \"abc123\",\r\n    \"confirmPassword\" : \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/signupuser",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"signupuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{abc}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"User_email\": \"User1@user.flipzon\",\r\n    \"password\": \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/loginuser",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"loginuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HomePage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/Home/",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"Home",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allproductsbycat",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/All_Products/Electronics",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"All_Products",
+						"Electronics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allproductsbycatpriceasc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/All_Productspasc/Electronics",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"All_Productspasc",
+						"Electronics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allproductsbycatpricedesc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/All_Productspdesc/Electronics",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"All_Productspdesc",
+						"Electronics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddtoCarts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"qty\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/Add-to-cart/1",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"Add-to-cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewcart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"qty\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/ViewCart",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"ViewCart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewAddress",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Full_Name\" : \"User1\", \r\n    \"Phone_number\" : \"1234567890\",\r\n    \"Pincode\" : \"700001\" ,\r\n    \"State\" : \"WB\",\r\n    \"City\" : \"KOLKATA\",\r\n    \"House_No\" : \"1/A\",\r\n    \"Road_name\" : \"ABC Road\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/AddNewAddress",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"AddNewAddress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm_Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/Flipzon/Confirm_Order",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"Flipzon",
+						"Confirm_Order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
