@@ -1,25 +1,25 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class ClasswiseSubjectStructure extends Model {
+  class Class extends Model {
     static associate(models) {
-      // Define associations here if needed
+      // Define associations here if needed 
     }
   }
 
-  ClasswiseSubjectStructure.init(
+  Class.init(
     {
       t_rel_class_id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
-      t_mst_client_id:{
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
+      t_mst_client_id: {
+        type: DataTypes.INTEGER,
       },
       code: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(10)
       },
       name: {
         type: DataTypes.STRING(100),
@@ -36,11 +36,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'ClasswiseSubjectStructure',
-      tableName: ' t_rel_class',
+      modelName: 'Class',
+      tableName: 't_rel_class',
       underscored: true,
     }
   );
 
-  return ClasswiseSubjectStructure;
+  return Class;
 };
