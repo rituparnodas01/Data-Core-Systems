@@ -1,24 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const ClasswiseSubjectStructure = require('../src/controllers/ClasswiseSubjectStructure');
 
 
-const authController = require("../src/controllers/authController");
-const academicYearController = require('../src/controllers/academicYearController');
-
-/* GET users listing. */
-router.get('/', function (req, res) {
-  res.send('respond with a resource');
-});
+router.post('/Edit', ClasswiseSubjectStructure.Edit)
 
 
-router.group('', (router) => {
-
-
-})
-
-
-router.group('/marksheet', (router) => {
-  router.use([authMiddleware.checkSchoolAdminAuthUser]);
-  router.post('/getmarksheet', marksSheetController.showmarksheet)
-});
 module.exports = router;
 
 

@@ -18,7 +18,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// db.user = require("./user")(DataTypes, sequelize, Model)
+db.subject = require("./subject")(DataTypes, sequelize, Model)
+db.subjectType = require("./subjectType")(DataTypes, sequelize, Model)
 
 
 db.sequelize.sync({ force: false });
