@@ -1,6 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
+const sequelize = require("../database/db");
 
-const Subject = (sequelize) => {
+const Subject = () => {
     return sequelize.define(
         'Subject',
         {

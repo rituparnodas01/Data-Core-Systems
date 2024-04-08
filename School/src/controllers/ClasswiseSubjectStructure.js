@@ -1,11 +1,7 @@
-const { QueryTypes } = require('sequelize');
-const DB = require('../models');
+const DB = require('../models/index');
+const Subject = require("../models/subject");
 const { sendSuccessResponse, sendRecordsResponse, sendErrorResponse } = require('../utils/response')
 const { validationErrorCode, unauthErrorCOde, notfoundErrorCode, successCode, serverErrorCode } = require('../utils/statuscode')
-
-var Subject = DB.subject
-
-const sequelize = DB.sequelize;
 
 // const showClasswiseSubjectStructure = async (req, res, next) => {
 //     try {
@@ -14,6 +10,8 @@ const sequelize = DB.sequelize;
         
 //     }
 // }
+
+
 
 const Edit = async(req, res, next) => {
     const { sub_type , sub } = req.body;
