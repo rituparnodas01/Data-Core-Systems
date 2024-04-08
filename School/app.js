@@ -11,4 +11,4 @@ app.use("/tffs", router);
 
 app.listen(port, () => {
     console.log(`Server is running at port no ${port}`);
-  });
+});

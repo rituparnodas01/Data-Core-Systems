@@ -1,28 +1,25 @@
-const DB = require('../models/index');
 const Section = require('../models/Section');
 const { sendSuccessResponse, sendRecordsResponse, sendErrorResponse } = require('../utils/response')
 const { validationErrorCode, unauthErrorCOde, notfoundErrorCode, successCode, serverErrorCode } = require('../utils/statuscode');
 
 
-
-
-var AllSection = async (req, res, next) => {
+var AllSection = async (req, res) => {
     // const { code, name } =req.body;
     try {
         var data = await Section.findAll({
-            // attributes: ["code","name"],
-            // where:{
-            //     is_active: "y"
-            // }
-        })
+            where: {
+                is_active: "y"
+            }
+        });
         // console.log(data[0].code, data[0].name);
-        return sendRecordsResponse(
+        sendRecordsResponse(
             res,
             successCode,
             "data get successfuly",
-            data,
+            data
         );
     } catch (error) {
+        console.log(error);
         return sendErrorResponse(
             res,
             serverErrorCode,

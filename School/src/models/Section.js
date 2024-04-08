@@ -1,13 +1,9 @@
-const { Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
+const sequelize = require("../database/db");
 
-module.exports = (sequelize, DataTypes) => {
-    class Section extends Model {
-        static associate(models) {
-            // Define associations here if needed
-        }
-    }
-
-    Section.init(
+const Section = () => {
+    return sequelize.define(
+        'Section',
         {
             t_rel_section_id: {
                 type: DataTypes.INTEGER,
@@ -34,12 +30,10 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            sequelize,
-            modelName: 'Section',
             tableName: 't_rel_section',
-            underscored: true,
+            underscored: true
         }
     );
-
-    return Section;
 };
+
+module.exports = Section;
