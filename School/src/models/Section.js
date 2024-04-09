@@ -31,9 +31,10 @@ const Section = () => {
         },
         {
             tableName: 't_rel_section',
-            underscored: true
+            underscored: true,
+            timestamps: false
         }
     );
 };
 
-module.exports = Section;
+module.exports = Section();
