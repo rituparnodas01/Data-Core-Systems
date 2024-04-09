@@ -81,8 +81,7 @@ var SearchSection = async (req, res) => {
             attributes: ["code","name"],
             where:{
                 [Op.or]: [
-                    { code },
-                    { name }
+                    { code, name }
                 ]
             }
         });
