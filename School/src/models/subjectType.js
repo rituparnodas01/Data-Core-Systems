@@ -1,6 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
+const sequelize = require("../database/db");
 
-const SubjectType = (sequelize) => {
+const SubjectType = () => {
     return sequelize.define(
         'SubjectType',
         {
@@ -31,4 +32,4 @@ const SubjectType = (sequelize) => {
     );
 };
 
-module.exports = SubjectType;
+module.exports = {SubjectType};

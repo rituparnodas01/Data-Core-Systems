@@ -34,4 +34,4 @@ const Subject = () => {
     );
 };
 
-module.exports = Subject;
+module.exports = {Subject};
