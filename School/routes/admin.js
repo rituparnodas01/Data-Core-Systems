@@ -4,7 +4,7 @@ const ClasswiseSubjectStructure = require('../src/controllers/ClasswiseSubjectSt
 const Section = require('../src/controllers/SectionController');
 
 
-router.post('/Edit', ClasswiseSubjectStructure.Edit)
+// router.post('/Edit', ClasswiseSubjectStructure.Edit)
 router.post('/AllSection', Section.AllSection)
 router.post('/EditSection/:id', Section.EditSection)
 router.post('/CreateNewSection', Section.CreateNewSection)

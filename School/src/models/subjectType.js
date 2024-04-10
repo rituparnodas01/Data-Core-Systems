@@ -28,8 +28,9 @@ const SubjectType = () => {
         {
             tableName: 't_rel_subject_type',
             underscored: true,
+            timestamps: false,
         }
     );
 };
 
-module.exports = {SubjectType};
+module.exports = SubjectType();
