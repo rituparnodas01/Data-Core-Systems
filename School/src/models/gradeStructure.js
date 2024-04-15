@@ -11,29 +11,29 @@ const gradeStructure = () => {
         t_mst_client_id: {
             type: DataTypes.INTEGER,
         },
-        ExamCategoryId: {
+        t_rel_exam_category_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: {
-                model: 'ExamCategories',
-                key: 't_rel_exam_category_id'
-            }
+            // references: {
+            //     model: 'ExamCategories',
+            //     key: 't_rel_exam_category_id'
+            // }
         },
-        ClassId: {
+        t_rel_class_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: {
-                model: 'Classes',
-                key: 't_rel_class_id'
-            }
+            // references: {
+            //     model: 'Classes',
+            //     key: 't_rel_class_id'
+            // }
         },
-        AcademicYearId: {
+        t_mst_academic_year_id: {
             type: DataTypes.BIGINT,
             allowNull: false,
-            references: {
-                model: 'gradeStructure',
-                key: 't_mst_academic_year_id'
-            }
+            // references: {
+            //     model: 'gradeStructure',
+            //     key: 't_mst_academic_year_id'
+            // }
         }
     },
         {

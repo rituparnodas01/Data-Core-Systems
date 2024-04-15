@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "d3ca16ba-cac1-4477-ae9e-a2e540a08120",
+		"name": "tffs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32936161"
+	},
+	"item": [
+		{
+			"name": "EDIT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"sub_type\": \"First Language \",\r\n    \"sub\": \"English Literature\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/Edit",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"Edit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllSection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/AllSection",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"AllSection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditSection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"D\",\r\n    \"name\" : \"Section - D\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/EditSection/4",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"EditSection",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateNewSection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"E\",\r\n    \"name\" : \"Section - E\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/CreateNewSection",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"CreateNewSection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchSection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"A\",\r\n    \"name\" : \"Section - B\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/SearchSection",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"SearchSection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllGrades",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/tffs/AllGrades",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"AllGrades"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
