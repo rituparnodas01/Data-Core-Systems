@@ -165,6 +165,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "AllFaculty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/tffs/AllFaculty",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"AllFaculty"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

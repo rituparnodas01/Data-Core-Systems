@@ -16,35 +16,49 @@ gradeStructure.belongsTo(AcademicYear, { foreignKey: 't_mst_academic_year_id' })
 
 var AllGrades = async (req, res) => {
 
-    var data = await gradeStructure.findAll ({
-        attributes:[
-            [sequelize.literal ("AcademicYear.code"), "academicyear"],
-            [sequelize.literal ("Class.name"), "class"],
-            [sequelize.literal ("ExamCategory.name"), "examcategory"],
-        ],
-        include:[
-        {
-            model: AcademicYear,
-            attributes: [],
-        },
-        {
-            model: Class,
-            attributes: [],
-        },
-        {
-            model: ExamCategory,
-            attributes: [],
-        },
-    ]
+    try {
+        var data = await gradeStructure.findAll({
+            attributes: [
+                [sequelize.literal("AcademicYear.code"), "academicyear"],
+                [sequelize.literal("Class.name"), "class"],
+                [sequelize.literal("ExamCategory.name"), "examcategory"],
+                [sequelize.literal("'NULL'"), "Title"],
+                [sequelize.literal("'Active'"), "Status"],
+                
+            ],
+            include: [
+                {
+                    model: AcademicYear,
+                    attributes: [],
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                },
+                {
+                    model: ExamCategory,
+                    attributes: [],
+                },
+            ]
 
-    });
-    sendRecordsResponse(
-                res,
-                successCode,
-                "data get successfully",
-                data
-            );
+        });
+        sendRecordsResponse(
+            res,
+            successCode,
+            "data get successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!",
+        );
+    }
 }
+
+
 
 
 
