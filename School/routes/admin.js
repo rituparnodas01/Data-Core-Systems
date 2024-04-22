@@ -6,7 +6,9 @@ const Grade = require('../src/controllers/gradecontroller');
 const Faculty = require('../src/controllers/FacultyController');
 
 
-// router.post('/Edit', ClasswiseSubjectStructure.Edit)
+router.post('/AllClass', ClasswiseSubjectStructure.SubwiseStructure)
+router.post('/SubMarks', ClasswiseSubjectStructure.SubMarks)
+// router.post('/AllClass', ClasswiseSubjectStructure.SubwiseStructure)
 router.post('/AllSection', Section.AllSection)
 router.post('/EditSection/:id', Section.EditSection)
 router.post('/CreateNewSection', Section.CreateNewSection)
