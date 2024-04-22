@@ -115,13 +115,15 @@ var SubMarks = async (req, res) => {
 
 var Edit = async (req, res) => {
 
+    
     try {
+        const { name } = req.params
         var data = await ClassSubject.findAll({
             attributes: [
                 [sequelize.literal("AcademicYear.code"), "academicyear"],
                 [sequelize.literal("Class.name"), "class"],
                 [sequelize.literal("Subject.name"), "subject"],
-                [sequelize.literal("SubjectType.name"), "subject"],
+                [sequelize.literal("SubjectType.name"), "subjecttype"],
             ],
             include: [
                 {
@@ -134,7 +136,18 @@ var Edit = async (req, res) => {
                 {
                     model: Class,
                     attributes: [],
-                }
+                    where:{
+                        name
+                    }
+                },
+                {
+                    model: Subject,
+                    attributes: [],
+                },
+                {
+                    model: SubjectType,
+                    attributes: [],
+                },
             ]
 
         });

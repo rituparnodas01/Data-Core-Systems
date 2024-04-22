@@ -7,13 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "EDIT",
+			"name": "SubwiseStructure",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    // \"sub_type\": \"First Language \",\r\n    \"sub\": \"English Literature\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,14 +21,71 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/tffs/Edit",
+					"raw": "localhost:4000/tffs/AllClass",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"tffs",
-						"Edit"
+						"AllClass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubMarks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/SubMarks",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"SubMarks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/Edit/Class-I",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"Edit",
+						"Class-I"
 					]
 				}
 			},
@@ -126,7 +183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"A\",\r\n    \"name\" : \"Section - B\"\r\n}",
+					"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - A\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
