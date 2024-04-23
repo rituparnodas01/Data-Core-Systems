@@ -19,6 +19,7 @@ var AllFaculty = async (req, res) => {
     try {
         var data = await class_section_subject_teacher_tagging.findAll({
             attributes:[
+                ["t_rel_class_section_subject_teacher_tagging_id", "Id"]
                 [sequelize.literal ("Teacher.code"), "Code"],
                 [sequelize.literal ("Teacher.name"), "Name"],
                 [sequelize.literal ("Class.name"), "class"],

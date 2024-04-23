@@ -4,7 +4,6 @@ const Class = require("../models/class");
 const AcademicDetails = require("../models/academicDetails");
 const AcademicYear = require("../models/academicYear");
 const ClassSubject = require("../models/classSubject")
-// const AcademicYear = require("../models/academicYear");
 const AcademicCategoryFirst = require("../models/academicCategoryFirst");
 const AcademicCategorySecond = require("../models/academicCategorySecond");
 const { Op } = require("sequelize");
@@ -96,7 +95,7 @@ var SubMarks = async (req, res) => {
             Category_2: Category2
         };
 
-        
+
         sendRecordsResponse(
             res,
             successCode,
@@ -113,9 +112,7 @@ var SubMarks = async (req, res) => {
     }
 }
 
-var Edit = async (req, res) => {
-
-    
+var     Edit = async (req, res) => {
     try {
         const { name } = req.params
         var data = await ClassSubject.findAll({

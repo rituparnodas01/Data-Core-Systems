@@ -7,7 +7,7 @@ const { validationErrorCode, unauthErrorCOde, notfoundErrorCode, successCode, se
 var AllSection = async (req, res) => {
     try {
         var data = await Section.findAll({
-            attributes: ["code","name"]
+            attributes: ["t_rel_section_id","code","name"]
         });
         sendRecordsResponse(
             res,
@@ -78,7 +78,7 @@ var SearchSection = async (req, res) => {
     const { code, name } =req.body;
     try {
         var data = await Section.findAll({
-            attributes: ["code","name"],
+            attributes: ["t_rel_section_id","code","name"],
             where:{
                 [Op.or]: [
                     { code },

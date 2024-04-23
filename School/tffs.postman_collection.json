@@ -63,21 +63,12 @@
 			"response": []
 		},
 		{
-			"name": "Edit",
+			"name": "EditSubjectStructure",
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "    ",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:4000/tffs/Edit/Class-I",
+					"raw": "localhost:4000/tffs/Edit/Class-II",
 					"host": [
 						"localhost"
 					],
@@ -85,7 +76,7 @@
 					"path": [
 						"tffs",
 						"Edit",
-						"Class-I"
+						"Class-II"
 					]
 				}
 			},
