@@ -6,7 +6,7 @@ const AcademicYear = require("../models/academicYear");
 const ClassSubject = require("../models/classSubject")
 const AcademicCategoryFirst = require("../models/academicCategoryFirst");
 const AcademicCategorySecond = require("../models/academicCategorySecond");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const sequelize = require("../database/db");
 const { sendSuccessResponse, sendRecordsResponse, sendErrorResponse } = require('../utils/response')
 const { validationErrorCode, unauthErrorCOde, notfoundErrorCode, successCode, serverErrorCode } = require('../utils/statuscode')
@@ -112,23 +112,24 @@ var SubMarks = async (req, res) => {
     }
 }
 
-var     Edit = async (req, res) => {
+var ViewSS = async (req, res) => {
     try {
         const { name } = req.params
         var data = await ClassSubject.findAll({
             attributes: [
+                ["t_rel_class_subject_id", "id"],
                 [sequelize.literal("AcademicYear.code"), "academicyear"],
                 [sequelize.literal("Class.name"), "class"],
-                [sequelize.literal("Subject.name"), "subject"],
                 [sequelize.literal("SubjectType.name"), "subjecttype"],
+                [sequelize.literal("Subject.name"), "subject"],
             ],
             include: [
                 {
                     model: AcademicYear,
                     attributes: [],
-                    where: {
-                        code: 2023
-                    }
+                    // where: {
+                    //     code: 2023
+                    // }
                 },
                 {
                     model: Class,
@@ -164,9 +165,110 @@ var     Edit = async (req, res) => {
     }
 }
 
+// var EditSS = async (req, res) => {
+//     try {
+//         const { id, name } = req.params
+//         const {Subject} = req.body
+//         const data = await ClassSubject.update(
+//             { Subject }, // Update values
+//             {
+//                 where: { t_rel_class_subject_id: id }, 
+
+//                 attributes: [
+//                     ["t_rel_class_subject_id", "id"],
+//                     [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                     [sequelize.literal("Class.name"), "class"],
+//                     [sequelize.literal("SubjectType.name"), "subjecttype"],
+//                     [sequelize.literal("Subject.name"), "subject"],
+//                 ],
+//                 include: [
+//                     {
+//                         model: AcademicYear,
+//                         attributes: [], 
+//                     },
+//                     {
+//                         model: Class,
+//                         attributes: [], 
+//                         where: { name } 
+//                     },
+//                     {
+//                         model: SubjectType,
+//                         attributes: [] 
+//                     },
+//                     {
+//                         model: Subject,
+//                         attributes: [] 
+//                     },
+//                 ],
+//             }
+//         );
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
+
+var EditSS = async (req, res) => {
+    try {
+        const { id, name } = req.params;
+        const { t_rel_subject_id } = req.body;
+        const data = await ClassSubject.update(
+            { t_rel_subject_id }, // Update values
+            {
+                where: { t_rel_class_subject_id: id },
+                // returning: true, // To return the updated record
+                include: [
+                    {
+                        model: AcademicYear,
+                        attributes: [],
+                    },
+                    {
+                        model: Class,
+                        attributes: [],
+                        where: { name },    
+                    },
+                    {
+                        model: SubjectType,
+                        attributes: [],
+                    },
+                    {
+                        model: Subject,
+                        attributes: [],
+                    },
+                ],
+            }
+        );
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data updated successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+};
+
+
 module.exports = {
     SubwiseStructure,
     SubMarks,
-    Edit
+    ViewSS,
+    EditSS
 }
 

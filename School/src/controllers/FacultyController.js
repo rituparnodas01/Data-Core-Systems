@@ -19,7 +19,7 @@ var AllFaculty = async (req, res) => {
     try {
         var data = await class_section_subject_teacher_tagging.findAll({
             attributes:[
-                ["t_rel_class_section_subject_teacher_tagging_id", "Id"]
+                ["t_rel_class_section_subject_teacher_tagging_id", "id"],
                 [sequelize.literal ("Teacher.code"), "Code"],
                 [sequelize.literal ("Teacher.name"), "Name"],
                 [sequelize.literal ("Class.name"), "class"],
@@ -61,11 +61,65 @@ var AllFaculty = async (req, res) => {
     }
 }
 
+var SearchFaculty = async (req, res) => {
+    try {
+        const { code, name} = req.body
+        var data = await class_section_subject_teacher_tagging.findAll({
+            attributes:[
+                ["t_rel_class_section_subject_teacher_tagging_id", "id"],
+                [sequelize.literal ("Teacher.code"), "Code"],
+                [sequelize.literal ("Teacher.name"), "Name"],
+                [sequelize.literal ("Class.name"), "class"],
+                [sequelize.literal ("Section.name"), "section"],
+                [sequelize.literal ("Subject.name"), "Tagged Subject"],
+            ],
+            include:[
+                {
+                    model: Teacher,
+                    attributes: [],
+                    where:{
+                        [Op.or]: [
+                            { code },
+                            { name }
+                        ]
+                    }
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                },
+                {
+                    model: Section,
+                    attributes: [],
+                },
+                {
+                    model: Subject,
+                    attributes: [],
+                },
+            ]
+        });
+        sendRecordsResponse(
+            res,
+            successCode,
+            "data get successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!",
+        );
+    }
+}
+
 
 
 
 
 
 module.exports = {
-    AllFaculty
+    AllFaculty,
+    SearchFaculty
 }

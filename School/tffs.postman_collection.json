@@ -63,20 +63,50 @@
 			"response": []
 		},
 		{
-			"name": "EditSubjectStructure",
+			"name": "ViewSubjectStructure",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:4000/tffs/Edit/Class-II",
+					"raw": "localhost:4000/tffs/ViewSS/Class-II",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"tffs",
-						"Edit",
+						"ViewSS",
 						"Class-II"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditSubjectStructure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"t_rel_subject_id\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/EditSS/11/Class-I",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"EditSS",
+						"11",
+						"Class-I"
 					]
 				}
 			},
@@ -174,7 +204,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - A\"\r\n}",
+					"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - B\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -228,6 +258,34 @@
 					"path": [
 						"tffs",
 						"AllFaculty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Faculty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/SearchFaculty",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"SearchFaculty"
 					]
 				}
 			},

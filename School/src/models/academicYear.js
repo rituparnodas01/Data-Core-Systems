@@ -32,7 +32,7 @@ const AcademicYear = () => {
         {
             tableName: 't_mst_academic_years',
             underscored: true,
-            timestamps: false
+            // timestamps: false
         }
     );
 };
