@@ -220,13 +220,11 @@ var ViewSS = async (req, res) => {
 
 var EditSS = async (req, res) => {
     try {
-        const { id, name } = req.params;
-        const { t_rel_subject_id } = req.body;
+        const { id, name, t_rel_subject_id } = req.body;
         const data = await ClassSubject.update(
-            { t_rel_subject_id }, // Update values
+            { t_rel_subject_id },
             {
                 where: { t_rel_class_subject_id: id },
-                // returning: true, // To return the updated record
                 include: [
                     {
                         model: AcademicYear,
