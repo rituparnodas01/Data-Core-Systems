@@ -27,8 +27,8 @@ var AllSection = async (req, res) => {
 
 var EditSection = async (req, res) => {
     try {
-        const{id} = req.params
-        const { code, name } = req.body
+
+        const { id, code, name } = req.body
         var data = await Section.update({
             code, name},
             {
