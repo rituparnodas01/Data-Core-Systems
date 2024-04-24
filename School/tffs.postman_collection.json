@@ -7,323 +7,342 @@
 	},
 	"item": [
 		{
-			"name": "SubwiseStructure",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Class Subject Structure",
+			"item": [
+				{
+					"name": "SubwiseStructure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SS",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SS"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/SS",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"SS"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SearchSubwiseStructure",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"Class-I\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "SearchSubwiseStructure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"Class-I\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SSS",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SSS"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/SSS",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"SSS"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SubMarks",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "SubMarks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SubMarks",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SubMarks"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/SubMarks",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"SubMarks"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ViewSubjectStructure",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Class-II\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "ViewSubjectStructure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Class-II\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/ViewSS",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"ViewSS"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/ViewSS",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"ViewSS"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "EditSubjectStructure",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 11,\r\n    \"name\" : \"Class-I\",\r\n    \"t_rel_subject_id\" : 3\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "EditSubjectStructure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 11,\r\n    \"name\" : \"Class-I\",\r\n    \"t_rel_subject_id\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/EditSS",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"EditSS"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:4000/tffs/EditSS",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"EditSS"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "AllSection",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Section",
+			"item": [
+				{
+					"name": "AllSection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/AllSection",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"AllSection"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/AllSection",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"AllSection"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "EditSection",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"D\",\r\n    \"name\" : \"Section - D\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "EditSection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 4,\r\n    \"code\" : \"D\",\r\n    \"name\" : \"Section - D\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/EditSection",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"EditSection"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/EditSection/4",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"EditSection",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreateNewSection",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"E\",\r\n    \"name\" : \"Section - E\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "CreateNewSection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"E\",\r\n    \"name\" : \"Section - E\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/CreateNewSection",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"CreateNewSection"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:4000/tffs/CreateNewSection",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"CreateNewSection"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SearchSection",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - B\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "SearchSection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SearchSection",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SearchSection"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:4000/tffs/SearchSection",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"SearchSection"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "AllGrades",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/tffs/AllGrades",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"AllGrades"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "AllFaculty",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/tffs/AllFaculty",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"AllFaculty"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Search Faculty",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Grade",
+			"item": [
+				{
+					"name": "AllGrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/tffs/AllGrades",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"AllGrades"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:4000/tffs/SearchFaculty",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"tffs",
-						"SearchFaculty"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Faculty",
+			"item": [
+				{
+					"name": "AllFaculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/tffs/AllFaculty",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"AllFaculty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Faculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"FAC002\",\r\n    \"name\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SearchFaculty",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SearchFaculty"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
