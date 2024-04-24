@@ -21,14 +21,42 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/tffs/AllClass",
+					"raw": "localhost:4000/tffs/SS",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"tffs",
-						"AllClass"
+						"SS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchSubwiseStructure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"Class-I\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/tffs/SSS",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"tffs",
+						"SSS"
 					]
 				}
 			},
@@ -67,16 +95,24 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Class-II\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:4000/tffs/ViewSS/Class-II",
+					"raw": "localhost:4000/tffs/ViewSS",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"tffs",
-						"ViewSS",
-						"Class-II"
+						"ViewSS"
 					]
 				}
 			},
@@ -89,7 +125,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"t_rel_subject_id\" : 5\r\n}",
+					"raw": "{\r\n    \"id\" : 11,\r\n    \"name\" : \"Class-I\",\r\n    \"t_rel_subject_id\" : 3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,16 +133,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/tffs/EditSS/11/Class-I",
+					"raw": "localhost:4000/tffs/EditSS",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"tffs",
-						"EditSS",
-						"11",
-						"Class-I"
+						"EditSS"
 					]
 				}
 			},
