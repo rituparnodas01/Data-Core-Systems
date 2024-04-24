@@ -52,7 +52,6 @@ var EditSection = async (req, res) => {
     }
 }
 
-
 var CreateNewSection = async (req, res) => {
     try {
         // const{id} = req.params
@@ -72,7 +71,6 @@ var CreateNewSection = async (req, res) => {
         );
     }
 }
-
 
 var SearchSection = async (req, res) => {
     const { code, name } =req.body;

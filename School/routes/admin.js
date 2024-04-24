@@ -6,15 +6,19 @@ const Grade = require('../src/controllers/gradecontroller');
 const Faculty = require('../src/controllers/FacultyController');
 
 
-router.post('/AllClass', ClasswiseSubjectStructure.SubwiseStructure)
+router.post('/SS', ClasswiseSubjectStructure.SubwiseStructure)
+router.post('/SSS', ClasswiseSubjectStructure.SearchSubwiseStructure)
 router.post('/SubMarks', ClasswiseSubjectStructure.SubMarks)
-router.post('/ViewSS/:name', ClasswiseSubjectStructure.ViewSS)
-router.post('/EditSS/:id/:name', ClasswiseSubjectStructure.EditSS)
+router.post('/ViewSS', ClasswiseSubjectStructure.ViewSS)
+router.post('/EditSS', ClasswiseSubjectStructure.EditSS)
+
 router.post('/AllSection', Section.AllSection)
 router.post('/EditSection/:id', Section.EditSection)
 router.post('/CreateNewSection', Section.CreateNewSection)
 router.post('/SearchSection', Section.SearchSection)
+
 router.post('/AllGrades', Grade.AllGrades)
+
 router.post('/AllFaculty', Faculty.AllFaculty)
 router.post('/SearchFaculty', Faculty.SearchFaculty)
 

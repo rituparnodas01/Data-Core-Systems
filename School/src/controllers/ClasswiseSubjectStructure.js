@@ -63,44 +63,91 @@ var SubwiseStructure = async (req, res) => {
     }
 }
 
-var SubMarks = async (req, res) => {
+var SearchSubwiseStructure = async (req, res) => {
 
     try {
-        // var data = await AcademicDetails.findAll({
-        //     attributes: [
-        //         [sequelize.literal("AcademicCategoryFirst.name"), "Category-1"],
-        //         [sequelize.literal("AcademicCategorySecond.name"), "Category-2"]
-        //     ],
-        //     include: [
-        //         {
-        //             model: AcademicCategoryFirst,
-        //             attributes: [],
-        //         },
-        //         {
-        //             model: AcademicCategorySecond,
-        //             attributes: [],
-        //         }
-        //     ]
 
-        var Category1 = await AcademicCategoryFirst.findAll({
-            attributes: ['name']
+        const { year, std } = req.body
+
+        var data = await AcademicDetails.findAll({
+            attributes: [
+                [sequelize.literal("AcademicYear.code"), "academicyear"],
+                [sequelize.literal("Class.name"), "class"]
+            ],
+            include: [
+                {
+                    model: AcademicYear,
+                    attributes: [],
+                    where: {
+                        year
+                    }
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                    where: {
+                        name: std
+                    }
+                }
+            ]
+
         });
-
-        var Category2 = await AcademicCategorySecond.findAll({
-            attributes: ['name']
-        });
-
-        var combinedData = {
-            Category_1: Category1,
-            Category_2: Category2
-        };
-
-
         sendRecordsResponse(
             res,
             successCode,
             "data get successfully",
-            combinedData
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!",
+        );
+    }
+}
+
+var SubMarks = async (req, res) => {
+
+    try {
+        var data = await AcademicDetails.findAll({
+            attributes: [
+                [sequelize.literal("AcademicCategoryFirst.name"), "Category-1"],
+                [sequelize.literal("AcademicCategorySecond.name"), "Category-2"],
+                [sequelize.literal("'NULL'"), "Full Marks"],
+            ],
+            include: [
+                {
+                    model: AcademicCategoryFirst,
+                    attributes: [],
+                },
+                {
+                    model: AcademicCategorySecond,
+                    attributes: [],
+                }
+            ]
+
+            // var Category1 = await AcademicCategoryFirst.findAll({
+            //     attributes: ['name']
+            // });
+
+            // var Category2 = await AcademicCategorySecond.findAll({
+            //     attributes: ['name']
+            // });
+
+            // var combinedData = {
+            //     Category_1: Category1,
+            //     Category_2: Category2,
+            //     Full_Marks : "Null"
+            // };
+
+        });
+        sendRecordsResponse(
+            res,
+            successCode,
+            "data get successfully",
+            data
         );
     } catch (error) {
         console.log(error);
@@ -114,7 +161,7 @@ var SubMarks = async (req, res) => {
 
 var ViewSS = async (req, res) => {
     try {
-        const { name } = req.params
+        const { name } = req.body
         var data = await ClassSubject.findAll({
             attributes: [
                 ["t_rel_class_subject_id", "id"],
@@ -134,7 +181,7 @@ var ViewSS = async (req, res) => {
                 {
                     model: Class,
                     attributes: [],
-                    where:{
+                    where: {
                         name
                     }
                 },
@@ -165,59 +212,6 @@ var ViewSS = async (req, res) => {
     }
 }
 
-// var EditSS = async (req, res) => {
-//     try {
-//         const { id, name } = req.params
-//         const {Subject} = req.body
-//         const data = await ClassSubject.update(
-//             { Subject }, // Update values
-//             {
-//                 where: { t_rel_class_subject_id: id }, 
-
-//                 attributes: [
-//                     ["t_rel_class_subject_id", "id"],
-//                     [sequelize.literal("AcademicYear.code"), "academicyear"],
-//                     [sequelize.literal("Class.name"), "class"],
-//                     [sequelize.literal("SubjectType.name"), "subjecttype"],
-//                     [sequelize.literal("Subject.name"), "subject"],
-//                 ],
-//                 include: [
-//                     {
-//                         model: AcademicYear,
-//                         attributes: [], 
-//                     },
-//                     {
-//                         model: Class,
-//                         attributes: [], 
-//                         where: { name } 
-//                     },
-//                     {
-//                         model: SubjectType,
-//                         attributes: [] 
-//                     },
-//                     {
-//                         model: Subject,
-//                         attributes: [] 
-//                     },
-//                 ],
-//             }
-//         );
-//         sendRecordsResponse(
-//             res,
-//             successCode,
-//             "data get successfully",
-//             data
-//         );
-//     } catch (error) {
-//         console.log(error);
-//         return sendErrorResponse(
-//             res,
-//             serverErrorCode,
-//             "Internal server error!",
-//         );
-//     }
-// }
-
 var EditSS = async (req, res) => {
     try {
         const { id, name, t_rel_subject_id } = req.body;
@@ -233,7 +227,7 @@ var EditSS = async (req, res) => {
                     {
                         model: Class,
                         attributes: [],
-                        where: { name },    
+                        where: { name },
                     },
                     {
                         model: SubjectType,
@@ -265,6 +259,7 @@ var EditSS = async (req, res) => {
 
 module.exports = {
     SubwiseStructure,
+    SearchSubwiseStructure,
     SubMarks,
     ViewSS,
     EditSS
