@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"Class-I\"\r\n}",
+							"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -245,7 +245,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"B\",\r\n    \"name\" : \"Section - B\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,6 +289,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "SearchGrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"ec\" : \"Non-Academic\",\r\n    \"status\" : \"\",\r\n    \"title\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/SG",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"SG"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -321,7 +349,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"FAC002\",\r\n    \"name\" : \"\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\",\r\n    \"std\" : \"\",\r\n    \"section\" : \"\",\r\n    \"tag_sub\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
