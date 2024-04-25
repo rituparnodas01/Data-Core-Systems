@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Class-II\"\r\n}",
+							"raw": "{\r\n    \"name\" : \"Class-III\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
