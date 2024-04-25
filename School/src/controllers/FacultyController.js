@@ -61,9 +61,74 @@ var AllFaculty = async (req, res) => {
     }
 }
 
+// var SearchFaculty = async (req, res) => {
+//     try {
+//         const { code, name, std, section, tag_sub} = req.body
+//         var data = await class_section_subject_teacher_tagging.findAll({
+//             attributes:[
+//                 ["t_rel_class_section_subject_teacher_tagging_id", "id"],
+//                 [sequelize.literal ("Teacher.code"), "Code"],
+//                 [sequelize.literal ("Teacher.name"), "Name"],
+//                 [sequelize.literal ("Class.name"), "class"],
+//                 [sequelize.literal ("Section.name"), "section"],
+//                 [sequelize.literal ("Subject.name"), "Tagged Subject"],
+//             ],
+//             include:[
+//                 {
+//                     model: Teacher,
+//                     attributes: [],
+//                     where:{
+//                         [Op.and]: [
+//                             { code },
+//                             { name }
+//                         ]
+//                     }
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Section,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Subject,
+//                     attributes: [],
+//                 },
+//             ]
+//         });
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
+
 var SearchFaculty = async (req, res) => {
     try {
-        const { code, name} = req.body
+        const { code, name, std, section, tag_sub } = req.body;
+        var teacherWhere = {};
+        var classWhere = {};
+        var sectionWhere = {};
+        var subjectWhere = {};
+
+        // Define where conditions for each model separately
+        if (code) teacherWhere.code = code;
+        if (name) teacherWhere.name = name;
+        if (std) classWhere.name = std;
+        if (section) sectionWhere.name = section;
+        if (tag_sub) subjectWhere.name = tag_sub;
+
         var data = await class_section_subject_teacher_tagging.findAll({
             attributes:[
                 ["t_rel_class_section_subject_teacher_tagging_id", "id"],
@@ -77,27 +142,26 @@ var SearchFaculty = async (req, res) => {
                 {
                     model: Teacher,
                     attributes: [],
-                    where:{
-                        [Op.or]: [
-                            { code },
-                            { name }
-                        ]
-                    }
+                    where: teacherWhere
                 },
                 {
                     model: Class,
                     attributes: [],
+                    where: classWhere
                 },
                 {
                     model: Section,
                     attributes: [],
+                    where: sectionWhere
                 },
                 {
                     model: Subject,
                     attributes: [],
+                    where: subjectWhere
                 },
             ]
         });
+
         sendRecordsResponse(
             res,
             successCode,
@@ -113,6 +177,8 @@ var SearchFaculty = async (req, res) => {
         );
     }
 }
+
+
 
 
 

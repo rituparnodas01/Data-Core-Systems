@@ -72,23 +72,90 @@ var CreateNewSection = async (req, res) => {
     }
 }
 
-var SearchSection = async (req, res) => {
-    const { code, name } =req.body;
+// var SearchSection = async (req, res) => {
+//     const { code, name } =req.body;
+//     try {
+//         var data = await Section.findAll({
+//             attributes: ["t_rel_section_id","code","name"],
+//             where:{
+//                 [Op.and]: [
+//                     { code },
+//                     { name }
+//                 ]
+//             }
+//         });
+//         // console.log(data[0].code, data[0].name);
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
+
+// const SearchSection = async (req, res) => {
+//     const { code, name } = req.body;
+//     try {
+//         let condition = {};
+//         if (code && name) {
+//             // Both code and name are provided, search by both
+//             condition = {
+//                 code,
+//                 name
+//             };
+//         } else {
+//             // Only one field is provided, search by that field
+//             if (code) {
+//                 condition.code = code;
+//             } else if (name) {
+//                 condition.name = name;
+//             } else {
+//                 // Both code and name are blank, return all records
+//                 condition = {};
+//             }
+//         }
+        
+//         const data = await Section.findAll({
+//             attributes: ["t_rel_section_id", "code", "name"],
+//             where: condition
+//         });
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// }
+
+const SearchSection = async (req, res) => {
+const { code, name } = req.body;
     try {
-        var data = await Section.findAll({
-            attributes: ["t_rel_section_id","code","name"],
-            where:{
-                [Op.or]: [
-                    { code },
-                    { name }
-                ]
-            }
+        const data = await Section.findAll({
+            attributes: ["t_rel_section_id", "code", "name"],
+            where: (code && name) ? { code, name } : (code ? { code } : (name ? { name } : {error}))
         });
-        // console.log(data[0].code, data[0].name);
+
         sendRecordsResponse(
             res,
             successCode,
-            "data get successfully",
+            "Data retrieved successfully",
             data
         );
     } catch (error) {
@@ -96,10 +163,12 @@ var SearchSection = async (req, res) => {
         return sendErrorResponse(
             res,
             serverErrorCode,
-            "Internal server error!",
+            "Internal server error!"
         );
     }
 }
+
+
 
 module.exports = {
     AllSection,
