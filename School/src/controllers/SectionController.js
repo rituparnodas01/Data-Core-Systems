@@ -25,32 +25,32 @@ var AllSection = async (req, res) => {
     }
 }
 
-var EditSection = async (req, res) => {
-    try {
+// var EditSection = async (req, res) => {
+//     try {
 
-        const { id, code, name } = req.body
-        var data = await Section.update({
-            code, name},
-            {
-                where: {
-                    t_rel_section_id: id
-                }
-            }
-    )
-    sendRecordsResponse(
-        res,
-        successCode,
-        "data get successfully",
-        data
-    );
-    } catch (error) {
-        return sendErrorResponse(
-            res,
-            serverErrorCode,
-            "Internal server error!",
-        );
-    }
-}
+//         const { id, code, name } = req.body
+//         var data = await Section.update({
+//             code, name},
+//             {
+//                 where: {
+//                     t_rel_section_id: id
+//                 }
+//             }
+//     )
+//     sendRecordsResponse(
+//         res,
+//         successCode,
+//         "data get successfully",
+//         data
+//     );
+//     } catch (error) {
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
 
 // var CreateNewSection = async (req, res) => {
 //     try {
@@ -144,6 +144,43 @@ var EditSection = async (req, res) => {
 //     }
 // }
 
+var EditSection = async (req, res) => {
+    try {
+        const { id, code, name } = req.body;
+
+        // Null validation for id, code, and name
+        if (!id || !code || !name) {
+            return sendErrorResponse(
+                res,
+                validationErrorCode,
+                "ID, code, and name are required fields."
+            );
+        }
+
+        var data = await Section.update(
+            { code, name },
+            {
+                where: {
+                    t_rel_section_id: id
+                }
+            }
+        );
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data updated successfully",
+            data
+        );
+    } catch (error) {
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+}
+
+
 var CreateNewSection = async (req, res) => {
     try {
         const { code, name } = req.body;
@@ -179,7 +216,7 @@ const { code, name } = req.body;
     try {
         const data = await Section.findAll({
             attributes: ["t_rel_section_id", "code", "name"],
-            where: (code && name) ? { code, name } : (code ? { code } : (name ? { name } : {error}))
+            where: (code && name) ? { code, name } : (code ? { code } : (name ? { name } : {}))
         });
 
         sendRecordsResponse(
