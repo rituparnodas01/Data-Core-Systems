@@ -52,25 +52,25 @@ var EditSection = async (req, res) => {
     }
 }
 
-var CreateNewSection = async (req, res) => {
-    try {
-        // const{id} = req.params
-        const { code, name } = req.body
-        var data = await Section.create({t_mst_client_id: 1, code, name, is_active: "y"})
-    sendRecordsResponse(
-        res,
-        successCode,
-        "data get successfully",
-        data
-    );
-    } catch (error) {
-        return sendErrorResponse(
-            res,
-            serverErrorCode,
-            "Internal server error!",
-        );
-    }
-}
+// var CreateNewSection = async (req, res) => {
+//     try {
+//         // const{id} = req.params
+//         const { code, name } = req.body
+//         var data = await Section.create({t_mst_client_id: 1, code, name, is_active: "y"})
+//     sendRecordsResponse(
+//         res,
+//         successCode,
+//         "data get successfully",
+//         data
+//     );
+//     } catch (error) {
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
 
 // var SearchSection = async (req, res) => {
 //     const { code, name } =req.body;
@@ -143,6 +143,36 @@ var CreateNewSection = async (req, res) => {
 //         );
 //     }
 // }
+
+var CreateNewSection = async (req, res) => {
+    try {
+        const { code, name } = req.body;
+
+        // Null validation for code and name
+        if (!code || !name) {
+            return sendErrorResponse(
+                res,
+                validationErrorCode,
+                "Code and name are required fields."
+            );
+        }
+
+        var data = await Section.create({t_mst_client_id: 1, code, name, is_active: "y"});
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data created successfully",
+            data
+        );
+    } catch (error) {
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+}
+
 
 const SearchSection = async (req, res) => {
 const { code, name } = req.body;
