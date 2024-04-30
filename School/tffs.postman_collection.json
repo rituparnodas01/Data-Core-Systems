@@ -128,7 +128,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 11,\r\n    \"name\" : \"Class-I\",\r\n    \"t_rel_subject_id\" : 3\r\n}",
+							"raw": "{\r\n    \"id\" : \"\",\r\n    \"name\" : \"\",\r\n    \"t_rel_subject_id\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 4,\r\n    \"code\" : \"D\",\r\n    \"name\" : \"Section - D\"\r\n}",
+							"raw": "{\r\n    \"id\" : 4,\r\n    \"code\" : \"\",\r\n    \"name\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"E\",\r\n    \"name\" : \"Section - E\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,6 +313,90 @@
 							"path": [
 								"tffs",
 								"SG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/CS",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"CS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewGrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/VG",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"VG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditGrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1\",\r\n    \"grade_points\" : \" \",\r\n    \"display_status\" : \"\",\r\n    \"name\" : \"\",\r\n    \"lower_limit\" : \" \",\r\n    \"upper_limit\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/EG",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"EG"
 							]
 						}
 					},
