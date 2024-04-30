@@ -14,7 +14,7 @@ gradeStructure.belongsTo(Class, { foreignKey: 't_rel_class_id' });
 gradeStructure.belongsTo(AcademicYear, { foreignKey: 't_mst_academic_year_id' });
 
 
-var AllGrades = async (req, res) => {
+var AllGradesStructure = async (req, res) => {
 
     try {
         var data = await gradeStructure.findAll({
@@ -110,23 +110,155 @@ var SearchGrades = async (req, res) => {
     }
 }
 
+// var ChangeStatus = async (req, res) => {
+//     try {
+
+//         const{ id } = req.body
+//         var data = await gradeStructure.update({is_active },
+//             {
+//                 where: 	{
+//                     t_rel_grade_structure_id : id
+//                 }
+//             }
+        
+//         );
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// }
+
 var ChangeStatus = async (req, res) => {
     try {
+        const { id } = req.body;
+        var existingData = await gradeStructure.findOne({
+            where: {
+                t_rel_grade_structure_id: id
+            }
+        });
 
-        const{ id, 	is_active } = req.body
-        var data = await gradeStructure.update({is_active},
+        if (!existingData) {
+            return sendErrorResponse(
+                res,
+                notfoundErrorCode,
+                "Data not found!"
+            );
+        }
+
+        const updatedIsActive = existingData.is_active === 'y' ? 'n' : 'y';
+
+        var data = await gradeStructure.update(
+            { is_active: updatedIsActive },
             {
-                where: 	{
-                    t_rel_grade_structure_id : id
+                where: {
+                    t_rel_grade_structure_id: id
                 }
             }
-        
         );
 
         sendRecordsResponse(
             res,
             successCode,
+            "Data updated successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+}
+
+var ViewGrades = async (req, res) => {
+
+    try {
+        var data = await grade.findAll({
+            attributes: ["grade_points","display_status","name","lower_limit","upper_limit"]
+        });
+        sendRecordsResponse(
+            res,
+            successCode,
             "data get successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!",
+        );
+    }
+}
+
+// var EditGrades = async (req, res) => {
+
+//     try {
+
+//         const{id, grade_points, display_status, name, lower_limit, upper_limit}= req.body
+
+//         var data = await grade.update(
+//             {grade_points, display_status, name, lower_limit, upper_limit},{
+//                 where: {
+//                     t_rel_grade_id : id
+//                 }
+//             }
+//         );
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
+
+var EditGrades = async (req, res) => {
+    try {
+        const { id, grade_points, display_status, name, lower_limit, upper_limit } = req.body;
+
+        // Null validation for grade_points, display_status, name, lower_limit, and upper_limit
+        if (!grade_points || !display_status || !name || !lower_limit || !upper_limit) {
+            return sendErrorResponse(
+                res,
+                validationErrorCode,
+                "(*) are the required fields."
+            );
+        }
+
+        var data = await grade.update(
+            { grade_points, display_status, name, lower_limit, upper_limit },
+            {
+                where: {
+                    t_rel_grade_id: id
+                }
+            }
+        );
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data updated successfully",
             data
         );
     } catch (error) {
@@ -145,8 +277,19 @@ var ChangeStatus = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
 module.exports = {
-    AllGrades,
+    AllGradesStructure,
     SearchGrades,
-    ChangeStatus
+    ChangeStatus,
+    ViewGrades,
+    EditGrades
 }

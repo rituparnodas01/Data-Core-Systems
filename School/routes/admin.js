@@ -17,9 +17,11 @@ router.post('/EditSection', Section.EditSection)
 router.post('/CreateNewSection', Section.CreateNewSection)
 router.post('/SearchSection', Section.SearchSection)
 
-router.post('/AllGrades', Grade.AllGrades)
+router.post('/AllGrades', Grade.AllGradesStructure)
 router.post('/SG', Grade.SearchGrades)
 router.post('/CS', Grade.ChangeStatus)
+router.post('/VG', Grade.ViewGrades)
+router.post('/EG', Grade.EditGrades)
 
 router.post('/AllFaculty', Faculty.AllFaculty)
 router.post('/SearchFaculty', Faculty.SearchFaculty)
