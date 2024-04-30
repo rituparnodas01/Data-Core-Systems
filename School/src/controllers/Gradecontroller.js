@@ -110,35 +110,6 @@ var SearchGrades = async (req, res) => {
     }
 }
 
-// var ChangeStatus = async (req, res) => {
-//     try {
-
-//         const{ id } = req.body
-//         var data = await gradeStructure.update({is_active },
-//             {
-//                 where: 	{
-//                     t_rel_grade_structure_id : id
-//                 }
-//             }
-        
-//         );
-
-//         sendRecordsResponse(
-//             res,
-//             successCode,
-//             "data get successfully",
-//             data
-//         );
-//     } catch (error) {
-//         console.log(error);
-//         return sendErrorResponse(
-//             res,
-//             serverErrorCode,
-//             "Internal server error!"
-//         );
-//     }
-// }
-
 var ChangeStatus = async (req, res) => {
     try {
         const { id } = req.body;
@@ -204,35 +175,6 @@ var ViewGrades = async (req, res) => {
         );
     }
 }
-
-// var EditGrades = async (req, res) => {
-
-//     try {
-
-//         const{id, grade_points, display_status, name, lower_limit, upper_limit}= req.body
-
-//         var data = await grade.update(
-//             {grade_points, display_status, name, lower_limit, upper_limit},{
-//                 where: {
-//                     t_rel_grade_id : id
-//                 }
-//             }
-//         );
-//         sendRecordsResponse(
-//             res,
-//             successCode,
-//             "data get successfully",
-//             data
-//         );
-//     } catch (error) {
-//         console.log(error);
-//         return sendErrorResponse(
-//             res,
-//             serverErrorCode,
-//             "Internal server error!",
-//         );
-//     }
-// }
 
 var EditGrades = async (req, res) => {
     try {
