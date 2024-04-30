@@ -113,10 +113,15 @@ var SearchGrades = async (req, res) => {
 var ChangeStatus = async (req, res) => {
     try {
 
-        var data = await gradeStructure.updte({
-
-
-        });
+        const{ id, 	is_active } = req.body
+        var data = await gradeStructure.update({is_active},
+            {
+                where: 	{
+                    t_rel_grade_structure_id : id
+                }
+            }
+        
+        );
 
         sendRecordsResponse(
             res,
@@ -142,5 +147,6 @@ var ChangeStatus = async (req, res) => {
 
 module.exports = {
     AllGrades,
-    SearchGrades
+    SearchGrades,
+    ChangeStatus
 }

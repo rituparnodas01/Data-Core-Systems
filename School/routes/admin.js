@@ -19,6 +19,7 @@ router.post('/SearchSection', Section.SearchSection)
 
 router.post('/AllGrades', Grade.AllGrades)
 router.post('/SG', Grade.SearchGrades)
+router.post('/CS', Grade.ChangeStatus)
 
 router.post('/AllFaculty', Faculty.AllFaculty)
 router.post('/SearchFaculty', Faculty.SearchFaculty)
