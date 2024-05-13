@@ -24,10 +24,53 @@ ClassSubject.belongsTo(SubjectType, { foreignKey: 't_rel_subject_type_id' });
 
 
 
-var SubwiseStructure = async (req, res) => {
+// var SubwiseStructure = async (req, res) => {
 
+//     try {
+//         const {code} =req.body
+//         var data = await AcademicDetails.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"]
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                     where: {
+//                         code
+//                     }
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                 }
+//             ]
+
+//         });
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// };
+
+const SubwiseStructure = async (req, res) => {
     try {
-        var data = await AcademicDetails.findAll({
+        const { code, page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
+        const offset = (page - 1) * pageSize;
+
+        // Fetch data for the current page
+        const data = await AcademicDetails.findAll({
             attributes: [
                 [sequelize.literal("AcademicYear.code"), "academicyear"],
                 [sequelize.literal("Class.name"), "class"]
@@ -37,35 +80,99 @@ var SubwiseStructure = async (req, res) => {
                     model: AcademicYear,
                     attributes: [],
                     where: {
-                        code: 2023
+                        code
                     }
                 },
                 {
                     model: Class,
                     attributes: [],
                 }
-            ]
-
+            ],
+            limit: pageSize,
+            offset: offset
         });
+
+        // Count total number of records for the given code
+        const totalCount = await AcademicDetails.count({
+            include: [
+                {
+                    model: AcademicYear,
+                    where: {
+                        code
+                    }
+                }
+            ]
+        });
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
         sendRecordsResponse(
             res,
             successCode,
-            "data get successfully",
-            data
+            "Data retrieved successfully",
+            { message, data}
         );
     } catch (error) {
         console.log(error);
         return sendErrorResponse(
             res,
             serverErrorCode,
-            "Internal server error!",
+            "Internal server error!"
         );
     }
 };
 
+// var SearchSubwiseStructure = async (req, res) => {
+//     try {
+//         const { year, std } = req.body;
+//         var academicYearWhere = {};
+//         var classWhere = {};
+
+//         // Define where conditions for each model separately
+//         if (year) academicYearWhere.year = year;
+//         if (std) classWhere.name = std;
+
+//         var data = await AcademicDetails.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"]
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                     where: academicYearWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                     where: classWhere
+//                 }
+//             ]
+//         });
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// };
+
 var SearchSubwiseStructure = async (req, res) => {
     try {
-        const { year, std } = req.body;
+        const { year, std, page, pageSize } = req.body;
+        
         var academicYearWhere = {};
         var classWhere = {};
 
@@ -73,7 +180,9 @@ var SearchSubwiseStructure = async (req, res) => {
         if (year) academicYearWhere.year = year;
         if (std) classWhere.name = std;
 
-        var data = await AcademicDetails.findAll({
+        const offset = (page - 1) * pageSize;
+
+        const data = await AcademicDetails.findAll({
             attributes: [
                 [sequelize.literal("AcademicYear.code"), "academicyear"],
                 [sequelize.literal("Class.name"), "class"]
@@ -89,24 +198,45 @@ var SearchSubwiseStructure = async (req, res) => {
                     attributes: [],
                     where: classWhere
                 }
+            ],
+            limit: pageSize,
+            offset: offset
+        });
+
+        // Count total number of records
+        const totalCount = await AcademicDetails.count({
+            include: [
+                {
+                    model: AcademicYear,
+                    where: academicYearWhere
+                },
+                {
+                    model: Class,
+                    where: classWhere
+                }
             ]
         });
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
-            "data get successfully",
-            data
+            "Data retrieved successfully",
+            {message,data}
         );
     } catch (error) {
         console.log(error);
         return sendErrorResponse(
             res,
             serverErrorCode,
-            "Internal server error!",
+            "Internal server error!"
         );
     }
 };
+
 
 var SubMarks = async (req, res) => {
 
@@ -252,12 +382,20 @@ var EditSS = async (req, res) => {
     }
 };
 
-
+var AddSS = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+    
 
 module.exports = {
     SubwiseStructure,
     SearchSubwiseStructure,
     SubMarks,
     ViewSS,
-    EditSS
+    EditSS,
+    AddSS
 }
