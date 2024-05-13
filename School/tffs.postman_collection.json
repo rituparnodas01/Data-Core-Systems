@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"code\" : 2023,\r\n    \"page\" : 28,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\" : \"2023\",\r\n    \"std\" : \"\"\r\n}",
+							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,7 +161,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -245,7 +245,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,6 +265,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "DeleteSection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/DeleteSection",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"DeleteSection"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -276,6 +304,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:4000/tffs/AllGrades",
 							"host": [
@@ -297,7 +334,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"ec\" : \"Non-Academic\",\r\n    \"status\" : \"\",\r\n    \"title\" : \"\"\r\n}",
+							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"ec\" : \"Non-Academic\",\r\n    \"status\" : \"\",\r\n    \"title\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -412,6 +449,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:4000/tffs/AllFaculty",
 							"host": [
@@ -433,7 +479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\",\r\n    \"std\" : \"\",\r\n    \"section\" : \"\",\r\n    \"tag_sub\" : \"\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\",\r\n    \"std\" : \"\",\r\n    \"section\" : \"\",\r\n    \"tag_sub\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -449,6 +495,90 @@
 							"path": [
 								"tffs",
 								"SearchFaculty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddFaculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"t_mst_client_id\" : 1,\r\n    \"t_rel_class_id\" : 8,\r\n    \"t_rel_section_id\" : 3,\r\n    \"t_rel_subject_id\" : 17,\r\n    \"t_rel_teacher_id\" : 105,\r\n    \"status\" : \"y\",\r\n    \"created_by\" : 105\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/AddFaculty",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"AddFaculty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditFaculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"43\",\r\n    \"t_mst_client_id\" : 2,\r\n    \"t_rel_class_id\" : 8,\r\n    \"t_rel_section_id\" : 3,\r\n    \"t_rel_subject_id\" : 17,\r\n    \"t_rel_teacher_id\" : 105,\r\n    \"status\" : \"y\",\r\n    \"created_by\" : 105\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/EditFaculty",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"EditFaculty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFaculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"42\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/DeleteFaculty",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"DeleteFaculty"
 							]
 						}
 					},
