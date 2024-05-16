@@ -345,7 +345,35 @@ var EditGrades = async (req, res) => {
     }
 }
 
+var AddGrades = async (req, res) => {
+    try {
+        const { grade_points, display_status, name, lower_limit, upper_limit } = req.body;
 
+        if (!grade_points || !display_status || !name || !lower_limit || !upper_limit) {
+            return sendErrorResponse(
+                res,
+                validationErrorCode,
+                "(*) are the required fields."
+            );
+        }
+
+        var data = await grade.create({ grade_points, display_status, name, lower_limit, upper_limit });
+
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data updated successfully",
+            data
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+}
 
 
 
@@ -365,5 +393,6 @@ module.exports = {
     SearchGrades,
     ChangeStatus,
     ViewGrades,
-    EditGrades
+    EditGrades,
+    AddGrades
 }

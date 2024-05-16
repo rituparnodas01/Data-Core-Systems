@@ -28,6 +28,7 @@ router.post('/SG', Grade.SearchGrades)
 router.post('/CS', Grade.ChangeStatus)
 router.post('/VG', Grade.ViewGrades)
 router.post('/EG', Grade.EditGrades)
+router.post('/AG', Grade.AddGrades)
 
 
 // Faculty
