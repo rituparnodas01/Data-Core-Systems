@@ -149,10 +149,55 @@ var CreateNewSection = async (req, res) => {
 //     }
 // }
 
+// const SearchSection = async (req, res) => {
+//     const { code, name, page, pageSize } = req.body;
+//     try {
+//         const offset = (page - 1) * pageSize;
+
+//         const whereClause = {};
+//         if (code) whereClause.code = code;
+//         if (name) whereClause.name = name;
+
+//         const data = await Section.findAll({
+//             attributes: ["t_rel_section_id", "code", "name"],
+//             where: whereClause,
+//             limit: pageSize,
+//             offset: offset
+//         });
+
+//         // Count total number of records
+//         const totalCount = await Section.count({
+//             where: whereClause
+//         });
+
+//         const totalPages = Math.ceil(totalCount / pageSize);
+
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message, data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// }
+
 const SearchSection = async (req, res) => {
-    const { code, name, page, pageSize } = req.body;
+    const { code, name } = req.body;
+    const { page = 1, limit = 10 } = req.query;
+    
     try {
-        const offset = (page - 1) * pageSize;
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
 
         const whereClause = {};
         if (code) whereClause.code = code;
@@ -172,13 +217,13 @@ const SearchSection = async (req, res) => {
 
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
             "Data retrieved successfully",
-            {message, data}
+            { message, data }
         );
     } catch (error) {
         console.log(error);
@@ -188,7 +233,8 @@ const SearchSection = async (req, res) => {
             "Internal server error!"
         );
     }
-}
+};
+
 
 var DeleteSection = async (req, res) => {
     try {

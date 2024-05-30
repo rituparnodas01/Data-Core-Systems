@@ -418,7 +418,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : \"1\",\r\n    \"grade_points\" : \" \",\r\n    \"display_status\" : \"\",\r\n    \"name\" : \"\",\r\n    \"lower_limit\" : \" \",\r\n    \"upper_limit\" : \"\"\r\n}",
+							"raw": "{\r\n    \"id\" : \"5\",\r\n    \"grade_points\" : \"P\",\r\n    \"display_status\" : \"both\",\r\n    \"name\" : \"Unmitigated Failure\",\r\n    \"lower_limit\" : \"40\",\r\n    \"upper_limit\" : \"49\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -434,6 +434,34 @@
 							"path": [
 								"tffs",
 								"EG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddGrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grade_points\" : \"\",\r\n    \"display_status\" : \"\",\r\n    \"name\" : \"\",\r\n    \"lower_limit\" : \"\",\r\n    \"upper_limit\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/tffs/AG",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"tffs",
+								"AG"
 							]
 						}
 					},
