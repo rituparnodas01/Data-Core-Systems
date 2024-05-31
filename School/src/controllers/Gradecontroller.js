@@ -58,59 +58,59 @@ gradeStructure.belongsTo(AcademicYear, { foreignKey: 't_mst_academic_year_id' })
 //     }
 // }
 
-var AllGradesStructure = async (req, res) => {
-    try {
-        const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
-        const offset = (page - 1) * pageSize;
+// var AllGradesStructure = async (req, res) => {
+//     try {
+//         const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
+//         const offset = (page - 1) * pageSize;
 
-        const data = await gradeStructure.findAll({
-            attributes: [
-                [sequelize.literal("AcademicYear.code"), "academicyear"],
-                [sequelize.literal("Class.name"), "class"],
-                [sequelize.literal("ExamCategory.name"), "examcategory"],
-                [sequelize.literal("'NULL'"), "Title"],
-                [sequelize.literal("'Active'"), "Status"],
-            ],
-            include: [
-                {
-                    model: AcademicYear,
-                    attributes: [],
-                },
-                {
-                    model: Class,
-                    attributes: [],
-                },
-                {
-                    model: ExamCategory,
-                    attributes: [],
-                },
-            ],
-            limit: pageSize,
-            offset: offset
-        });
+//         const data = await gradeStructure.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"],
+//                 [sequelize.literal("ExamCategory.name"), "examcategory"],
+//                 [sequelize.literal("'NULL'"), "Title"],
+//                 [sequelize.literal("'Active'"), "Status"],
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: ExamCategory,
+//                     attributes: [],
+//                 },
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
 
-        // Count total number of records
-        const totalCount = await gradeStructure.count();
+//         // Count total number of records
+//         const totalCount = await gradeStructure.count();
 
-        const totalPages = Math.ceil(totalCount / pageSize);
+//         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
-        sendRecordsResponse(
-            res,
-            successCode,
-            "Data retrieved successfully",
-            {message , data}
-        );
-    } catch (error) {
-        console.log(error);
-        return sendErrorResponse(
-            res,
-            serverErrorCode,
-            "Internal server error!"
-        );
-    }
-};
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message , data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
 
 // var SearchGrades = async (req, res) => {
 //     try {
@@ -164,16 +164,155 @@ var AllGradesStructure = async (req, res) => {
 //     }
 // }
 
+// var SearchGrades = async (req, res) => {
+//     try {
+//         const { year, std, status, title, ec, page, pageSize } = req.body;
+
+//         // Define where conditions for each include block separately
+//         const academicYearWhere = year ? { year } : {};
+//         const classWhere = std ? { name: std } : {};
+//         const examCategoryWhere = ec ? { name: ec } : {};
+
+//         const offset = (page - 1) * pageSize;
+
+//         const data = await gradeStructure.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"],
+//                 [sequelize.literal("ExamCategory.name"), "examcategory"],
+//                 [sequelize.literal("'NULL'"), "Title"],
+//                 [sequelize.literal("'Active'"), "Status"],
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                     where: academicYearWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                     where: classWhere
+//                 },
+//                 {
+//                     model: ExamCategory,
+//                     attributes: [],
+//                     where: examCategoryWhere
+//                 },
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
+
+//         // Count total number of records
+//         const totalCount = await gradeStructure.count({
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     where: academicYearWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     where: classWhere
+//                 },
+//                 {
+//                     model: ExamCategory,
+//                     where: examCategoryWhere
+//                 },
+//             ]
+//         });
+
+//         const totalPages = Math.ceil(totalCount / pageSize);
+
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message,data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
+
+var AllGradesStructure = async (req, res) => {
+    try {
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
+
+        const data = await gradeStructure.findAll({
+            attributes: [
+                [sequelize.literal("AcademicYear.code"), "academicyear"],
+                [sequelize.literal("Class.name"), "class"],
+                [sequelize.literal("ExamCategory.name"), "examcategory"],
+                [sequelize.literal("'NULL'"), "Title"],
+                [sequelize.literal("'Active'"), "Status"],
+            ],
+            include: [
+                {
+                    model: AcademicYear,
+                    attributes: [],
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                },
+                {
+                    model: ExamCategory,
+                    attributes: [],
+                },
+            ],
+            limit: pageSize,
+            offset: offset
+        });
+
+        // Count total number of records
+        const totalCount = await gradeStructure.count();
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data retrieved successfully",
+            { message, data }
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+};
+
+
 var SearchGrades = async (req, res) => {
     try {
-        const { year, std, status, title, ec, page, pageSize } = req.body;
+        const { year, std, status, title, ec } = req.body;
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
 
         // Define where conditions for each include block separately
         const academicYearWhere = year ? { year } : {};
         const classWhere = std ? { name: std } : {};
         const examCategoryWhere = ec ? { name: ec } : {};
-
-        const offset = (page - 1) * pageSize;
 
         const data = await gradeStructure.findAll({
             attributes: [
@@ -224,13 +363,13 @@ var SearchGrades = async (req, res) => {
 
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
             "Data retrieved successfully",
-            {message,data}
+            { message, data }
         );
     } catch (error) {
         console.log(error);
@@ -241,6 +380,7 @@ var SearchGrades = async (req, res) => {
         );
     }
 };
+
 
 var ChangeStatus = async (req, res) => {
     try {

@@ -64,65 +64,65 @@ ClassSubject.belongsTo(SubjectType, { foreignKey: 't_rel_subject_type_id' });
 //     }
 // };
 
-const SubwiseStructure = async (req, res) => {
-    try {
-        const { code, page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
-        const offset = (page - 1) * pageSize;
+// const SubwiseStructure = async (req, res) => {
+//     try {
+//         const { code, page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
+//         const offset = (page - 1) * pageSize;
 
-        // Fetch data for the current page
-        const data = await AcademicDetails.findAll({
-            attributes: [
-                [sequelize.literal("AcademicYear.code"), "academicyear"],
-                [sequelize.literal("Class.name"), "class"]
-            ],
-            include: [
-                {
-                    model: AcademicYear,
-                    attributes: [],
-                    where: {
-                        code
-                    }
-                },
-                {
-                    model: Class,
-                    attributes: [],
-                }
-            ],
-            limit: pageSize,
-            offset: offset
-        });
+//         // Fetch data for the current page
+//         const data = await AcademicDetails.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"]
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                     where: {
+//                         code
+//                     }
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                 }
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
 
-        // Count total number of records for the given code
-        const totalCount = await AcademicDetails.count({
-            include: [
-                {
-                    model: AcademicYear,
-                    where: {
-                        code
-                    }
-                }
-            ]
-        });
+//         // Count total number of records for the given code
+//         const totalCount = await AcademicDetails.count({
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     where: {
+//                         code
+//                     }
+//                 }
+//             ]
+//         });
 
-        const totalPages = Math.ceil(totalCount / pageSize);
+//         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
-        sendRecordsResponse(
-            res,
-            successCode,
-            "Data retrieved successfully",
-            { message, data}
-        );
-    } catch (error) {
-        console.log(error);
-        return sendErrorResponse(
-            res,
-            serverErrorCode,
-            "Internal server error!"
-        );
-    }
-};
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             { message, data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
 
 // var SearchSubwiseStructure = async (req, res) => {
 //     try {
@@ -169,18 +169,155 @@ const SubwiseStructure = async (req, res) => {
 //     }
 // };
 
+
+const SubwiseStructure = async (req, res) => {
+    try {
+        const { code } = req.body;  // Assuming 'code' is still provided in the request body
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
+
+        // Fetch data for the current page
+        const data = await AcademicDetails.findAll({
+            attributes: [
+                [sequelize.literal("AcademicYear.code"), "academicyear"],
+                [sequelize.literal("Class.name"), "class"]
+            ],
+            include: [
+                {
+                    model: AcademicYear,
+                    attributes: [],
+                    where: {
+                        code
+                    }
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                }
+            ],
+            limit: pageSize,
+            offset: offset
+        });
+
+        // Count total number of records for the given code
+        const totalCount = await AcademicDetails.count({
+            include: [
+                {
+                    model: AcademicYear,
+                    where: {
+                        code
+                    }
+                }
+            ]
+        });
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data retrieved successfully",
+            { message, data }
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+};
+
+// var SearchSubwiseStructure = async (req, res) => {
+//     try {
+//         const { year, std, page, pageSize } = req.body;
+        
+//         var academicYearWhere = {};
+//         var classWhere = {};
+
+//         // Define where conditions for each model separately
+//         if (year) academicYearWhere.year = year;
+//         if (std) classWhere.name = std;
+
+//         const offset = (page - 1) * pageSize;
+
+//         const data = await AcademicDetails.findAll({
+//             attributes: [
+//                 [sequelize.literal("AcademicYear.code"), "academicyear"],
+//                 [sequelize.literal("Class.name"), "class"]
+//             ],
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     attributes: [],
+//                     where: academicYearWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                     where: classWhere
+//                 }
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
+
+//         // Count total number of records
+//         const totalCount = await AcademicDetails.count({
+//             include: [
+//                 {
+//                     model: AcademicYear,
+//                     where: academicYearWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     where: classWhere
+//                 }
+//             ]
+//         });
+
+//         const totalPages = Math.ceil(totalCount / pageSize);
+
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message,data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
+
+
 var SearchSubwiseStructure = async (req, res) => {
     try {
-        const { year, std, page, pageSize } = req.body;
-        
+        const { year, std } = req.body;
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
+
         var academicYearWhere = {};
         var classWhere = {};
 
         // Define where conditions for each model separately
         if (year) academicYearWhere.year = year;
         if (std) classWhere.name = std;
-
-        const offset = (page - 1) * pageSize;
 
         const data = await AcademicDetails.findAll({
             attributes: [
@@ -219,13 +356,13 @@ var SearchSubwiseStructure = async (req, res) => {
 
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
             "Data retrieved successfully",
-            {message,data}
+            { message, data }
         );
     } catch (error) {
         console.log(error);

@@ -25,13 +25,51 @@ const { validationErrorCode, unauthErrorCOde, notfoundErrorCode, successCode, se
 //     }
 // }
 
+// var AllSection = async (req, res) => {
+//     try {
+//         const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
+//         const offset = (page - 1) * pageSize;
+
+//         const data = await Section.findAll({
+//             attributes: ["t_rel_section_id","code","name"],
+//             limit: pageSize,
+//             offset: offset
+//         });
+
+//         // Count total number of records
+//         const totalCount = await Section.count();
+
+//         const totalPages = Math.ceil(totalCount / pageSize);
+
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message , data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
+
+
 var AllSection = async (req, res) => {
     try {
-        const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
-        const offset = (page - 1) * pageSize;
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
 
         const data = await Section.findAll({
-            attributes: ["t_rel_section_id","code","name"],
+            attributes: ["t_rel_section_id", "code", "name"],
             limit: pageSize,
             offset: offset
         });
@@ -41,13 +79,13 @@ var AllSection = async (req, res) => {
 
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
             "Data retrieved successfully",
-            {message , data}
+            { message, data }
         );
     } catch (error) {
         console.log(error);
@@ -193,7 +231,7 @@ var CreateNewSection = async (req, res) => {
 const SearchSection = async (req, res) => {
     const { code, name } = req.body;
     const { page = 1, limit = 10 } = req.query;
-    
+
     try {
         const pageNumber = parseInt(page);
         const pageSize = parseInt(limit);

@@ -62,64 +62,64 @@ class_section_subject_teacher_tagging.belongsTo(Teacher, { foreignKey: 't_rel_te
 // }
 
 
-var AllFaculty = async (req, res) => {
-    try {
-        const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
-        const offset = (page - 1) * pageSize;
+// var AllFaculty = async (req, res) => {
+//     try {
+//         const { page, pageSize } = req.body; // Assuming page number and page size are provided in the request body
+//         const offset = (page - 1) * pageSize;
 
-        const data = await class_section_subject_teacher_tagging.findAll({
-            attributes:[
-                ["t_rel_class_section_subject_teacher_tagging_id", "id"],
-                [sequelize.literal ("Teacher.code"), "Code"],
-                [sequelize.literal ("Teacher.name"), "Name"],
-                [sequelize.literal ("Class.name"), "class"],
-                [sequelize.literal ("Section.name"), "section"],
-                [sequelize.literal ("Subject.name"), "Tagged Subject"],
-            ],
-            include:[
-                {
-                    model: Teacher,
-                    attributes: [],
-                },
-                {
-                    model: Class,
-                    attributes: [],
-                },
-                {
-                    model: Section,
-                    attributes: [],
-                },
-                {
-                    model: Subject,
-                    attributes: [],
-                },
-            ],
-            limit: pageSize,
-            offset: offset
-        });
+//         const data = await class_section_subject_teacher_tagging.findAll({
+//             attributes:[
+//                 ["t_rel_class_section_subject_teacher_tagging_id", "id"],
+//                 [sequelize.literal ("Teacher.code"), "Code"],
+//                 [sequelize.literal ("Teacher.name"), "Name"],
+//                 [sequelize.literal ("Class.name"), "class"],
+//                 [sequelize.literal ("Section.name"), "section"],
+//                 [sequelize.literal ("Subject.name"), "Tagged Subject"],
+//             ],
+//             include:[
+//                 {
+//                     model: Teacher,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Section,
+//                     attributes: [],
+//                 },
+//                 {
+//                     model: Subject,
+//                     attributes: [],
+//                 },
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
 
-        // Count total number of records
-        const totalCount = await class_section_subject_teacher_tagging.count();
+//         // Count total number of records
+//         const totalCount = await class_section_subject_teacher_tagging.count();
 
-        const totalPages = Math.ceil(totalCount / pageSize);
+//         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
-        sendRecordsResponse(
-            res,
-            successCode,
-            "Data retrieved successfully",
-            {message , data}
-        );
-    } catch (error) {
-        console.log(error);
-        return sendErrorResponse(
-            res,
-            serverErrorCode,
-            "Internal server error!"
-        );
-    }
-};
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message , data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!"
+//         );
+//     }
+// };
 
 // var SearchFaculty = async (req, res) => {
 //     try {
@@ -185,10 +185,195 @@ var AllFaculty = async (req, res) => {
 //     }
 // }
 
+var AllFaculty = async (req, res) => {
+    try {
+        const { page = 1, limit = 10 } = req.query;
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
+
+        const data = await class_section_subject_teacher_tagging.findAll({
+            attributes: [
+                ["t_rel_class_section_subject_teacher_tagging_id", "id"],
+                [sequelize.literal("Teacher.code"), "Code"],
+                [sequelize.literal("Teacher.name"), "Name"],
+                [sequelize.literal("Class.name"), "class"],
+                [sequelize.literal("Section.name"), "section"],
+                [sequelize.literal("Subject.name"), "Tagged Subject"],
+            ],
+            include: [
+                {
+                    model: Teacher,
+                    attributes: [],
+                },
+                {
+                    model: Class,
+                    attributes: [],
+                },
+                {
+                    model: Section,
+                    attributes: [],
+                },
+                {
+                    model: Subject,
+                    attributes: [],
+                },
+            ],
+            limit: pageSize,
+            offset: offset
+        });
+
+        // Count total number of records
+        const totalCount = await class_section_subject_teacher_tagging.count();
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+        sendRecordsResponse(
+            res,
+            successCode,
+            "Data retrieved successfully",
+            { message, data }
+        );
+    } catch (error) {
+        console.log(error);
+        return sendErrorResponse(
+            res,
+            serverErrorCode,
+            "Internal server error!"
+        );
+    }
+};
+
+
+// var SearchFaculty = async (req, res) => {
+//     try {
+//         const { code, name, std, section, tag_sub, page, pageSize } = req.body;
+        
+//         var teacherWhere = {};
+//         var classWhere = {};
+//         var sectionWhere = {};
+//         var subjectWhere = {};
+
+//         // Define where conditions for each model separately
+//         if (code) teacherWhere.code = code;
+//         if (name) teacherWhere.name = name;
+//         if (std) classWhere.name = std;
+//         if (section) sectionWhere.name = section;
+//         if (tag_sub) subjectWhere.name = tag_sub;
+
+//         const offset = (page - 1) * pageSize;
+
+//         var data = await class_section_subject_teacher_tagging.findAll({
+//             attributes:[
+//                 ["t_rel_class_section_subject_teacher_tagging_id", "id"],
+//                 [sequelize.literal ("Teacher.code"), "Code"],
+//                 [sequelize.literal ("Teacher.name"), "Name"],
+//                 [sequelize.literal ("Class.name"), "class"],
+//                 [sequelize.literal ("Section.name"), "section"],
+//                 [sequelize.literal ("Subject.name"), "Tagged Subject"],
+//             ],
+//             include:[
+//                 {
+//                     model: Teacher,
+//                     attributes: [],
+//                     where: teacherWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     attributes: [],
+//                     where: classWhere
+//                 },
+//                 {
+//                     model: Section,
+//                     attributes: [],
+//                     where: sectionWhere
+//                 },
+//                 {
+//                     model: Subject,
+//                     attributes: [],
+//                     where: subjectWhere
+//                 },
+//             ],
+//             limit: pageSize,
+//             offset: offset
+//         });
+
+//         // Count total number of records
+//         const totalCount = await class_section_subject_teacher_tagging.count({
+//             include:[
+//                 {
+//                     model: Teacher,
+//                     where: teacherWhere
+//                 },
+//                 {
+//                     model: Class,
+//                     where: classWhere
+//                 },
+//                 {
+//                     model: Section,
+//                     where: sectionWhere
+//                 },
+//                 {
+//                     model: Subject,
+//                     where: subjectWhere
+//                 },
+//             ]
+//         });
+
+//         const totalPages = Math.ceil(totalCount / pageSize);
+
+//         const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "Data retrieved successfully",
+//             {message , data}
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );
+//     }
+// }
+
+// var AddFaculty = async (req, res) => {
+//     try {
+//         const {t_mst_client_id , t_rel_class_id , t_rel_section_id , t_rel_subject_id , t_rel_teacher_id , status , created_by} = req.body
+//         var data = await class_section_subject_teacher_tagging.create({
+//             t_mst_client_id , t_rel_class_id , t_rel_section_id , t_rel_subject_id , t_rel_teacher_id , status , created_by
+//         });
+//         sendRecordsResponse(
+//             res,
+//             successCode,
+//             "data get successfully",
+//             data
+//         );
+//     } catch (error) {
+//         console.log(error);
+//         return sendErrorResponse(
+//             res,
+//             serverErrorCode,
+//             "Internal server error!",
+//         );  
+//     }
+// }
+
 var SearchFaculty = async (req, res) => {
     try {
-        const { code, name, std, section, tag_sub, page, pageSize } = req.body;
-        
+        const { code, name, std, section, tag_sub } = req.body;
+        const { page = 1, limit = 10 } = req.query;  // Default values for page and limit
+
+        const pageNumber = parseInt(page);
+        const pageSize = parseInt(limit);
+        const offset = (pageNumber - 1) * pageSize;
+
         var teacherWhere = {};
         var classWhere = {};
         var sectionWhere = {};
@@ -201,18 +386,16 @@ var SearchFaculty = async (req, res) => {
         if (section) sectionWhere.name = section;
         if (tag_sub) subjectWhere.name = tag_sub;
 
-        const offset = (page - 1) * pageSize;
-
         var data = await class_section_subject_teacher_tagging.findAll({
-            attributes:[
+            attributes: [
                 ["t_rel_class_section_subject_teacher_tagging_id", "id"],
-                [sequelize.literal ("Teacher.code"), "Code"],
-                [sequelize.literal ("Teacher.name"), "Name"],
-                [sequelize.literal ("Class.name"), "class"],
-                [sequelize.literal ("Section.name"), "section"],
-                [sequelize.literal ("Subject.name"), "Tagged Subject"],
+                [sequelize.literal("Teacher.code"), "Code"],
+                [sequelize.literal("Teacher.name"), "Name"],
+                [sequelize.literal("Class.name"), "class"],
+                [sequelize.literal("Section.name"), "section"],
+                [sequelize.literal("Subject.name"), "Tagged Subject"],
             ],
-            include:[
+            include: [
                 {
                     model: Teacher,
                     attributes: [],
@@ -240,7 +423,7 @@ var SearchFaculty = async (req, res) => {
 
         // Count total number of records
         const totalCount = await class_section_subject_teacher_tagging.count({
-            include:[
+            include: [
                 {
                     model: Teacher,
                     where: teacherWhere
@@ -262,13 +445,13 @@ var SearchFaculty = async (req, res) => {
 
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const message = `Page ${page} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
+        const message = `Page ${pageNumber} of ${totalPages} | View ${pageSize} records | Found total ${totalCount} records`;
 
         sendRecordsResponse(
             res,
             successCode,
             "Data retrieved successfully",
-            {message , data}
+            { message, data }
         );
     } catch (error) {
         console.log(error);
@@ -280,27 +463,6 @@ var SearchFaculty = async (req, res) => {
     }
 }
 
-// var AddFaculty = async (req, res) => {
-//     try {
-//         const {t_mst_client_id , t_rel_class_id , t_rel_section_id , t_rel_subject_id , t_rel_teacher_id , status , created_by} = req.body
-//         var data = await class_section_subject_teacher_tagging.create({
-//             t_mst_client_id , t_rel_class_id , t_rel_section_id , t_rel_subject_id , t_rel_teacher_id , status , created_by
-//         });
-//         sendRecordsResponse(
-//             res,
-//             successCode,
-//             "data get successfully",
-//             data
-//         );
-//     } catch (error) {
-//         console.log(error);
-//         return sendErrorResponse(
-//             res,
-//             serverErrorCode,
-//             "Internal server error!",
-//         );  
-//     }
-// }
 
 var AddFaculty = async (req, res) => {
     try {

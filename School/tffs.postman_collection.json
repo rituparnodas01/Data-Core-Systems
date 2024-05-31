@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : 2023,\r\n    \"page\" : 28,\r\n    \"pageSize\" : 10\r\n}",
+							"raw": "{\r\n    \"code\" : 2023\r\n    // \"page\" : 28,\r\n    // \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,7 +24,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/tffs/SS",
+							"raw": "localhost:4000/tffs/SS?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -32,6 +32,16 @@
 							"path": [
 								"tffs",
 								"SS"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -44,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\"\r\n    // \"page\" : 1,\r\n    // \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,7 +62,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/tffs/SSS",
+							"raw": "localhost:4000/tffs/SSS?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -60,6 +70,16 @@
 							"path": [
 								"tffs",
 								"SSS"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -159,17 +179,8 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:4000/tffs/AllSection",
+							"raw": "localhost:4000/tffs/AllSection?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -177,6 +188,16 @@
 							"path": [
 								"tffs",
 								"AllSection"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -245,7 +266,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"raw": "{\r\n    \"code\" : \"\",\r\n    \"name\" : \"\"\r\n    // \"page\" : 1,\r\n    // \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +274,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/tffs/SearchSection",
+							"raw": "localhost:4000/tffs/SearchSection?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -261,6 +282,16 @@
 							"path": [
 								"tffs",
 								"SearchSection"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -304,17 +335,8 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:4000/tffs/AllGrades",
+							"raw": "localhost:4000/tffs/AllGrades?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -322,6 +344,16 @@
 							"path": [
 								"tffs",
 								"AllGrades"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -334,7 +366,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"ec\" : \"Non-Academic\",\r\n    \"status\" : \"\",\r\n    \"title\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"raw": "{\r\n    \"year\" : \"\",\r\n    \"std\" : \"\",\r\n    \"ec\" : \"Non-Academic\",\r\n    \"status\" : \"\",\r\n    \"title\" : \"\"\r\n    // \"page\" : 1,\r\n    // \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,7 +374,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/tffs/SG",
+							"raw": "localhost:4000/tffs/SG?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -350,6 +382,16 @@
 							"path": [
 								"tffs",
 								"SG"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -477,17 +519,8 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:4000/tffs/AllFaculty",
+							"raw": "localhost:4000/tffs/AllFaculty?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -495,6 +528,16 @@
 							"path": [
 								"tffs",
 								"AllFaculty"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -507,7 +550,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\",\r\n    \"std\" : \"\",\r\n    \"section\" : \"\",\r\n    \"tag_sub\" : \"\",\r\n    \"page\" : 1,\r\n    \"pageSize\" : 10\r\n}",
+							"raw": "{\r\n    \"code\" : \"FAC001\",\r\n    \"name\" : \"\",\r\n    \"std\" : \"\",\r\n    \"section\" : \"\",\r\n    \"tag_sub\" : \"\"\r\n    // \"page\" : 1,\r\n    // \"pageSize\" : 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -515,7 +558,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/tffs/SearchFaculty",
+							"raw": "localhost:4000/tffs/SearchFaculty?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
@@ -523,6 +566,16 @@
 							"path": [
 								"tffs",
 								"SearchFaculty"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
