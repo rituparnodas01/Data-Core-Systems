@@ -16,7 +16,7 @@ router.post('/EditSS', ClasswiseSubjectStructure.EditSS)
 
 // Section
 router.post('/AllSection', Section.AllSection)
-router.post('/EditSection', Section.EditSection)
+router.post('/EditSection/:id', Section.EditSection)
 router.post('/CreateNewSection', Section.CreateNewSection)
 router.post('/SearchSection', Section.SearchSection)
 router.post('/DeleteSection', Section.DeleteSection)

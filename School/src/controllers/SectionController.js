@@ -100,10 +100,12 @@ var AllSection = async (req, res) => {
 
 var EditSection = async (req, res) => {
     try {
-        const { id, code, name } = req.body;
+        
+        const { id } = req.params;
+        const { code, name } = req.body;
 
         // Null validation for id, code, and name
-        if (!id || !code || !name) {
+        if ( !code || !name) {
             return sendErrorResponse(
                 res,
                 validationErrorCode,
